@@ -1,0 +1,43 @@
+.yuyue{
+    position: absolute;
+    left: 2rem;
+    top:-0.3rem;
+}
+.order_color{
+    color:#fe8a4b;
+}
+.my_dotted{
+    border-top:1px dotted #c5c5c5;
+    border-bottom:1px dotted #c5c5c5;
+}
+.my_input{
+    width:3rem;
+    height: 1.3rem;
+}
+.count:hover{
+    border:1px solid #fa6790;
+    color:#fa6790;
+}
+.btn_color{
+    background: #fe8a4b;
+}
+#mask{
+    opacity: 0.5;
+    background:green;
+    width:235px;
+    height:142.5px;
+}
+#super-mask{
+    opacity: 0;
+    width:470px;
+    height:285px;
+    top:0;
+}
+#div-lg{
+    width:470px;
+    height:285px;
+    left:470px;
+    top:0;
+    z-index: 5;
+    background-image:url("../img/order/lgimg/1.lg.jpg")
+}

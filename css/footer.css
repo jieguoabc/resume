@@ -1,0 +1,11 @@
+.f_btn{
+    border:1px solid #BF954D;
+    color:#BF954D;
+}
+a{
+    color:#666;
+}
+a:hover{
+    color: #B08C4A;
+    text-decoration: none;
+}

@@ -1,0 +1,18 @@
+.log_border{
+    border-radius: 3px;
+}
+.m_bg{
+    background: #F5FBFD;
+    border-bottom:5px solid #DBDBDB;
+    border-top:1px solid #DBDBDB;
+}
+.login_w{
+    width:313px;
+}
+.login_input{
+    width:222px;
+    outline: 0;
+}
+.pink_color{
+    color: #fa6790;
+}

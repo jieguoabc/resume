@@ -1,0 +1,24 @@
+
+.list_color:hover{
+    color: black !important;
+    text-decoration: none;
+}
+.more{
+    border:5px solid transparent;
+    border-top-color:#666;
+}
+.on_visited:focus{
+    background: black;
+    color:white;
+}
+.on_visited{
+    width:100px;
+}
+.on_visited:hover{
+    color:white;
+}
+.area:focus{
+    color:black;
+    font-weight: bold;
+}
+

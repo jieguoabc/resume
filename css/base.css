@@ -1,0 +1,45 @@
+.my_small{
+    font-size:0.8rem;
+}
+.phone_color{
+    color: #f18300;
+}
+
+.my_select{
+    border:4px solid transparent;
+    border-top-color:#A7B3BD;
+}
+.text_color{
+    color:#666;
+}
+.my_select2{
+    border:4px solid transparent;
+    border-top-color:#7B848B;
+    transform:rotate(-90deg);
+}
+.my_color{
+    color:#B08C4A;
+}
+.my_header{
+    width:100%;
+    height:17.5rem;
+}
+.my_footer{
+    width:100%;
+    height:17.5rem;
+}
+.b_bg{
+    background: #f2f2f2;
+    min-width: 1210px;
+}
+.my_button{
+    background: #fa6790;
+}
+.top{
+    position:absolute;
+    z-index: 10;
+}
+.top_width,.midd_width{
+    width: 1210px;
+    margin:auto;
+}

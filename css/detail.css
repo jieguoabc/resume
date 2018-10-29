@@ -1,0 +1,49 @@
+.my_shadow{
+    box-shadow: 1px 1px 2px;
+}
+.money{
+   color: #fa6790;
+}
+.scoll_one{
+    height: 0.6rem;
+    width:6.8rem;
+    background: #fa6790;
+}
+.scoll_two{
+    height: 0.6rem;
+    width:0.8rem;
+    background: #fa6790;
+}
+.scoll_three{
+    height: 0.6rem;
+    width:6rem;
+    background: #FFE8F0;
+}
+.eval{
+    font-size: 3rem;
+    color:#fa6790;
+}
+.eval_choose{
+    border:1px solid  #febdce;
+    outline:none;
+    background: white;
+}
+.eval_choose:hover{
+    border:1px solid #fa6790;
+}
+.eval_choose:focus{
+    background:#f999;
+}
+.my_class{
+    color:black;
+}
+.my_class:hover{
+    color:black;
+}
+.my_class:focus{
+  color:#fa6790;
+}
+.my_select3{
+    border:4px solid transparent;
+    border-top-color:#7B848B;
+}

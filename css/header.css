@@ -1,0 +1,69 @@
+a{
+    color:#666;
+}
+a:hover{
+    color: #B08C4A;
+    text-decoration: none;
+}
+.my_a{
+    color:black;
+}
+.shu{
+    color:#E3E3E3;
+}
+.zhuan{
+    transform:rotate(-90deg);
+
+}
+div input{
+    outline:none;
+
+}
+.h_input{
+    border:2px solid #BF974D;
+    width:550px;
+    height:40px;
+    line-height: 40px;
+}
+.button{
+    background: #BF974D;
+    width:100px;
+    height:36px;
+}
+.nav_top{
+    background: #BF974D;
+    width:217px;
+}
+.nav_middle{
+    width:217px;
+    position:absolute;
+    z-index: 10;
+}
+.right_h{
+    height:40px;
+    background: #FFF8EB;
+    border:1px solid #EDE3CE;
+}
+.bg-dark h6 a{
+    color:white;
+    text-decoration:  none;
+}
+.bg-dark h6 a:hover{
+    color: #B08C4A;
+}
+.bg-dark p a{
+    color:#a6a6a6;
+    font-size: 0.8rem;
+    text-decoration: none;
+}
+.bg-dark p a:hover{
+    color: #B08C4A;
+}
+.bot_border{
+    border-bottom:2px solid #B08C4A;
+    width:100%;
+}
+#header{
+    min-width: 1100px;
+}
+

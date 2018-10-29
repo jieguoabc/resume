@@ -1,0 +1,19 @@
+.my_green{
+    background:linear-gradient(to top,#fdfdfd 0%,#f9f9f9 100%);
+    height:0.5rem;
+    border-top:1px solid #ebebeb;
+    border-radius: 30%;
+}
+.my_input {
+    width: 320px;
+}
+.right_bg{
+    background: #f5fbff;
+    border:1px solid #d1eeff;
+}
+.prov_inpput{
+    width:156px;
+}
+.get_prov{
+    width:156px;
+}

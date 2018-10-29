@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <title>Title</title>
+  <style>
+      /* div{
+           border:1px solid red;
+       }*/
+</style>
+</head>
+<body >
+<div id="main">
+    <div class="b_bg m-0">
+        <div class="top_width d-flex justify-content-between">
+            <ul v-if="!islogin" class="nav justify-content-center my_small">
+                <li class="nav-item pt-2 text_color">Hi,欢迎来到百度糯米</li>
+                <li class="nav-item"><a href="#" :href="signin" class="nav-link my_color">请登录</a></li>
+                <li class="nav-item"><a href="register.html" class="nav-link ">免费注册</a></li>
+            </ul>
+            <ul v-else class="nav justify-content-center my_small">
+                <li class="nav-item pt-2 text_color">Hi,<span v-text="uname" class="pl-1"></span></li>
+                <li class="nav-item"><a href="#" class="nav-link " @click.prevent="signout()">退出</a></li>
+            </ul>
+            <ul class="nav my_small">
+                <li class="nav-item"><a href="#" class="nav-link ">个人中心</a></li>
+                <li class="nav-item d-flex align-items-center"><a href="#" class="nav-link pr-0" >最近浏览 </a><span class="my_select mt-1 mr-3"></span><span class="shu">|</span></li>
+                <li class="nav-item d-flex align-items-center"><a href="#" class="nav-link pr-0">糯米APP</a><span class="my_select mt-1  mr-3"></span><span class="shu">|</span></li>
+                <li class="nav-item d-flex align-items-center"><a href="#" class="nav-link pr-0 ">我是商家</a><span class="my_select mt-1 "></li>
+                <li class="nav-item"><a href="#" class="nav-link ">帮助中心</a></li>
+                <li class="nav-item"><a href="#" class="nav-link ">食品安全</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="midd_width ">
+        <!--搜索行-->
+        <div class="d-flex align-items-center">
+            <a href="index.html"><img src="img/header/1538539305(1).jpg" alt="" class="mr-4"></a>
+            <div class="d-flex pt-4 mr-5 clearfix">成都 <span class="zhuan font-weight-bold ml-1"><</span></div>
+            <div class="pt-4 mt-3 ">
+                <div class=" h_input ml-3 ">
+                    <input v-model="kword" @keyup.13="search()" class="border-0 p-0 my_small ml-2" type="text" placeholder="搜索商家/地点">
+                    <button @click="search()" class="border-0 text-white float-right button">搜索</button>
+                </div>
+                <ul class="nav my_smalltext-muted">
+                    <li class="nav-item"><a href="#" class="nav-link">spa按摩</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link ">舞蹈</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link ">绘画培训</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link ">游泳馆</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link ">家政</a></li>
+                </ul>
+            </div>
+            <ul class="nav ml-3 right_h align-items-center mt-1">
+                <li class="nav-item d-flex align-items-center right_color border-right-0 "><a href="#" class="nav-link"><img src="img/header/1538542952(1).jpg" alt=""></a><span class="shu">|</span></li>
+                <li class="nav-item d-flex align-items-center right_color border-left-0 border-right-0 "><a href="#" class="nav-link"><img src="img/header/1538542971(1).jpg" alt=""></a><span class="shu">|</span></li>
+                <li class="nav-item right_color border-left-0 "><a href="#" class="nav-link"><img src="img/header/1538542992(1).jpg" alt=""></a></li>
+            </ul>
+        </div>
+        <!--导航行-->
+        <div>
+            <div class="d-flex mt-3">
+                <!--左侧折叠导航栏-->
+                <div  class="mt-1">
+                    <nav class="navbar nav_top p-0 pl-1 pt-1 pb-1 navbar-dark">
+                        <a href="#" class="navbar-brand"><h6 class="mb-0 pl-1 ">全部分类</h6></a>
+                        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" >
+                            <!--在小屏幕下按钮上的三条短横线效果-->
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </nav>
+                    <div  class="nav_middle bg-dark  pl-2 pr-2">
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#">酒店</a></h6>
+                            <p><a href="#" >成都/</a><a href="#" >北京/</a><a href="#" >上海</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#" >旅游</a></h6>
+                            <p><a href="#" >目的地攻略/</a><a href="#" >行程计划</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#" >电影</a></h6>
+                            <p><a href="#" >看影片/</a><a href="#" >找影院</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#" >休闲娱乐</a></h6>
+                            <p><a href="#" >ktv</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#" >结婚</a></h6>
+                            <p ><a href="#" >婚纱摄影/</a><a href="#" >婚庆服务</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#">生活服务</a></h6>
+                            <p><a href="#" >配镜/</a><a href="#" >鲜花</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="products.html" >美食</a></h6>
+                            <p><a href="#" >自助餐/</a><a href="#" >小吃快餐/</a><a href="#" >火锅</a></p>
+                        </div>
+                        <div class="d-flex justify-content-between pt-2">
+                            <h6><a href="#" >丽人</a></h6>
+                            <p><a href="#">美发/</a><a href="#">美甲/</a><a href="#">美容SPA</a></p>
+                        </div>
+                    </div>
+                </div>
+                <!--右侧导航链接-->
+                <div class="d-flex slide mt-2">
+                    <div class="bot_border">
+                        <ul class="nav">
+                            <li class="nav-item pl-3"><a href="#" class="nav-link my_a">首页</a></li>
+                            <li class="nav-item pl-3"><a href="#" class="nav-link pr-0 my_a" >酒店 </a></li>
+                            <li class="nav-item pl-4 d-flex align-items-center"><a href="#" class="nav-link pr-0 my_a">出行</a><span class="my_select mt-1  mr-3"></span></li>
+                            <li class="nav-item pl-3"><a href="#" class="nav-link pr-0 my_a">电影</a></li>
+                            <li class="nav-item pl-3"><a href="#" class="nav-link my_a">结婚</a></li>
+                            <li class="nav-item pl-3"><a href="#" class="nav-link my_a">外卖</a></li>
+                        </ul>
+                    </div>
+                    <div class="mr-0  d-flex pt-1 mt-2 ml-3">
+                        <div><img src="img/index/banner1.jpg" alt="" ></div>
+                        <div class="ml-3">
+                            <img src="img/index/1538552020(1).jpg" alt="" class="mb-3">
+                            <img src="img/index/1538551897(1).jpg" alt="" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--右侧图片-->
+        <!--热门电影-->
+        <div class="mt-5 clearfix">
+            <h4 class="float-left pt-2">热映电影</h4>
+            <ul class="breadcrumb float-right bg-white">
+                <li class="breadcrumb-item"><a href="#" class="my_a">看影片</a></li>
+                <li class="breadcrumb-item"><a href="#" class="my_a">找影院</a></li>
+                <li class="breadcrumb-item"><a href="#" class="my_a">看票房</a></li>
+                <li class="d-flex"><a href="#" class="ml-5 my_a">查看全部</a><span class="my_select2 mt-1 ml-2"></span></li>
+            </ul>
+        </div>
+        <div class="border-bottom">
+            <div class="d-flex p-0 justify-content-around">
+                <a v-for="p in res.slice(0,6)" class="card p-2" href="#">
+                    <div class="position-relative"><img :src="p.pic" alt="" ><span class="text-white p-1 position-absolute score">{{p.score}}</span></div>
+                    <p class="my_card mt-2 text-dark">{{p.title}}</p>
+                    <div class="text-center"><button class="btn my_color bg-white piao">选座购票</button></div>
+                </a>
+            </div>
+        </div>
+        <!--休闲娱乐-->
+        <div class="mt-5 clearfix">
+            <h4 class="float-left pt-2">休闲娱乐</h4>
+            <ul class="breadcrumb float-right bg-white">
+                <li class="breadcrumb-item"><a href="#" class="my_a">KTV</a></li>
+                <li class="breadcrumb-item"><a href="#" class="my_a">足浴按摩</a></li>
+                <li class="breadcrumb-item"><a href="#" class="my_a">轰趴馆</a></li>
+                <li class="breadcrumb-item"><a href="#" class="my_a">运动健身</a></li>
+                <li class="d-flex"><a href="#" class="ml-5 my_a">查看全部</a><span class="my_select2 mt-1 ml-2"></span></li>
+            </ul>
+        </div>
+        <div class="d-flex border-bottom justify-content-around">
+            <a v-for="p in res2" class="card p-2" href="#">
+                <div class="position-relative "><img :src="p.pic" alt="" ></div>
+                <p class="my_card mt-2 text-dark text-left text-truncate">{{p.title}}</p>
+                <div class="d-flex justify-content-between my_small">
+                    <p class="text-dark ">{{p.details}}&nbsp;<span>|</span>&nbsp;{{p.area}}</p>
+                    <p class="text-dark">{{p.count}}</p>
+                </div>
+                <p class="text-dark my_small">{{p.avg}}</p>
+            </a>
+            
+        </div>
+        <!--旅游-->
+        <div class="mt-5 clearfix">
+            <h4 class="float-left pt-2">旅游</h4>
+            <ul class="breadcrumb float-right bg-white">
+                <li class="d-flex"><a href="#" class="ml-5 my_a">查看全部</a><span class="my_select2 mt-1 ml-2"></span></li>
+            </ul>
+        </div>
+        <div class="d-flex border-bottom justify-content-around">
+            <a class="card p-2 " href="#">
+                <div class="position-relative ">
+                    <img src="img/index/1538575419(1).jpg" alt="">
+                    <div class="position-absolute text-dark Travel">
+                        <h3>目的地攻略</h3>
+                        <p>Travelling guide</p>
+                    </div>
+                </div>
+            </a>
+            <a class="card p-2 " href="#">
+                <div class="position-relative ">
+                    <img src="img/index/1538575589(1).jpg" alt="" >
+                    <div class="position-absolute text-dark Travel">
+                        <h3>行程计划</h3>
+                        <p>Travelling plan</p>
+                    </div>
+                </div>
+            </a>
+            <a class="card p-2 " href="#">
+                <div class="position-relative ">
+                    <img src="img/index/1538575674(1).jpg" alt="">
+                    <div class="position-absolute text-dark Travel">
+                        <h3>游记</h3>
+                        <p>Travelling notes</p>
+                        </div>
+                </div>
+            </a>
+        </div>
+        <!--结婚-->
+        <div class="mt-5 clearfix">
+            <h4 class="float-left pt-2">结婚</h4>
+            <ul class="breadcrumb float-right bg-white">
+                <li class="d-flex"><a href="#" class="ml-5 my_a">查看全部</a><span class="my_select2 mt-1 ml-2"></span></li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-around border-bottom">
+            <a class="card p-2" href="#">
+                <div class="position-relative ">
+                    <img src="img/index/1538575948.jpg" alt="" >
+                    <div class="position-absolute text-dark Travel">
+                        <h3>婚纱摄影</h3>
+                        <p>Wddding Photo</p>
+                    </div>
+                </div>
+            </a>
+            <a class="card p-2 " href="#">
+                <div class="position-relative ">
+                    <img src="img/index/1538575966(1).jpg" alt="">
+                    <div class="position-absolute text-dark Travel">
+                        <h3>婚纱礼服</h3>
+                        <p>Wedding Dress</p>
+                    </div>
+                </div>
+            </a>
+            <div class="d-flex flex-column">
+                <a class="card p-2" href="#">
+                    <div class="position-relative ">
+                        <img src="img/index/1538575984(1).jpg" alt="" >
+                        <div class="position-absolute text-white Travel">
+                            <h3>婚庆服务</h3>
+                            <p>Wedding Service</p>
+                        </div>
+                    </div>
+                </a>
+                <a class="card p-2 mt-2" href="#">
+                    <div class="position-relative ">
+                        <img src="img/index/1538576053(1).jpg" alt="">
+                        <div class="position-absolute text-white Travel">
+                            <h3>个性写真</h3>
+                            <p>Personal Photo</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+        <!--底部-->
+    <div class="midd_width">
+        <div class="border-bottom mt-5"><h6 class="m-0 border-bottom border-dark d-inline-block pb-2">热门商场</h6></div>
+        <div class="d-flex justify-content-between mb-5">
+            <ul class="list-unstyled my_small">
+                <li class="p-2"><a href="#">华润万象城</a></li>
+                <li class="p-2"><a href="#">龙湖北城天街</a></li>
+                <li class="p-2"><a href="#">伊势丹百货</a></li>
+                <li class="p-2"><a href="#">仁恒置地广场</a></li>
+                <li class="p-2"><a href="#">奥克斯广场</a></li>
+            </ul>
+            <ul class="list-unstyled my_small">
+            <li class="p-2"><a href="#">凯德天府</a></li>
+            <li class="p-2"><a href="#">成都远洋太古里</a></li>
+            <li class="p-2"><a href="#">银石广场购物中心</a></li>
+            <li class="p-2"><a href="#">仁和春天百货（光华店）</a></li>
+            <li class="p-2"><a href="#">新世纪环球中心</a></li>
+            </ul>
+            <ul class="list-unstyled my_small">
+                <li class="p-2"><a href="#">凯丹广场</a></li>
+                <li class="p-2"><a href="#">群光广场</a></li>
+                <li class="p-2"><a href="#">韩国城</a></li>
+                <li class="p-2"><a href="#">优品道广场</a></li>
+                <li class="p-2"><a href="#">苏宁广场城市奥特莱斯</a></li>
+            </ul>
+            <ul class="list-unstyled my_small">
+                <li class="p-2"><a href="#">世豪广场</a></li>
+                <li class="p-2"><a href="#">伊藤洋华堂</a></li>
+                <li class="p-2"><a href="#">时代广场</a></li>
+                <li class="p-2"><a href="#">西单商场</a></li>
+                <li class="p-2"><a href="#">九方购物中心</a></li>
+            </ul>
+            <ul class="list-unstyled my_small">
+                <li class="p-2"><a href="#">万达广场（金牛店）</a></li>
+                <li class="p-2"><a href="#">新世纪百货（成都店）</a></li>
+                <li class="p-2"><a href="#">王府井百货（春熙路店）</a></li>
+                <li class="p-2"><a href="#">乐宾百货</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--引入底部-->
+<footer id="footer"></footer>
+<script src="js/footer.js"></script>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/vue.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
