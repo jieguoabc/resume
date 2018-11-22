@@ -1,23 +1,25 @@
 const express=require("express")
 const router=express.Router()
-const pool=require("../pool")
+const pool=require("../pool.js")
 
 //测试地址: http://localhost:3000/products?kwords=
 router.get("/",(req,res)=>{
            //bodyParser:url.parse(req.url,true)
   var kwords=req.query.kwords;
   //"macbook i5 128g"
-  console.log(kwords);
+  console.log(kwords)
   var arr=kwords.split(" ")//arr[macbook,i5,128g]
   for(var i=0;i<arr.length;i++){
-    arr[i]=`title like '%${arr[i]}%'`
+    arr[i]=`title like '%${arr[i]}%' or title_a like '%${arr[i]}%' or title_d like '%${arr[i]}%' or title_t like '%${arr[i]}%'`
   }//arr[title like '%macbook%', ... ]
   var where=" where "+arr.join(" and ")
+ //console.log(where)
   // where title like '%macbook%' and title like '%i5%' and title like '%128g%'
   //要回发客户端的支持分页的对象
   var output={ pageSize:9 } //每页9个商品
   output.pno=req.query.pno;
-  var sql="SELECT *,( SELECT md from nuomi_food_pic where laptop_id=lid limit 1 ) as md FROM nuomi_food ";
+  //console.log(output.pno)
+  var sql="SELECT *,( SELECT md from nuomi_food_pic where nuomi_id=lid limit 1 ) as md FROM nuomi_food ";
   pool.query(sql+where,[],(err,result)=>{
     if(err) console.log(err);
     output.count=result.length;//获得总记录数
@@ -25,7 +27,7 @@ router.get("/",(req,res)=>{
       output.count/output.pageSize);
     output.products=//截取分页后的结果集
       result.slice(output.pno*9,output.pno*9+9);
-
+     // console.log(output)
     res.writeHead(200,{
       "Content-Type":"application/json;charset=utf-8",
       "Access-Control-Allow-Origin":"*"
