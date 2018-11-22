@@ -11,411 +11,250 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
     <title>Title</title>
   <style>
-      /* div{
-           border:1px solid red;
-       }*/
+    [v-cloak]{
+        display:none
+    }
 </style>
 </head>
 <body >
 <header id="header"></header>
-<div class="midd_width mt-3 mb-5">
+<div id="main" class="midd_width mt-3 mb-5">
     <!--列表介绍-->
     <p class="mt-2">美食</p>
     <div class="row mr-0">
         <div class="col-9 pr-0">
-            <div class="border mb-3">
             <!--分类-->
-            <div class="row mt-3">
-                <div class="col-2">
-                    <div class="d-flex justify-content-around">
-                        <p class="text_color">分类</p>
-                        <p><a href="#" class="list_color on_visited p-1">全部</a></p>
-                    </div>
-                </div>
-                <div class="col-8 my_small p-0">
-                    <div class="d-flex">
-                        <ul class="list-unstyled ">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1 ">中餐/家常菜</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">烧烤/烤肉</a></li>
-                        </ul>
-                        <ul class="list-unstyled ">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">蛋糕</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">夏日饮品</a></li>
-                        </ul>
-                        <ul class="list-unstyled ">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">火锅</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">甜品</a></li>
-                        </ul>
-                        <ul class="list-unstyled ">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">小吃快餐</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">夏日饮品</a></li>
-                        </ul>
-                        <ul class="list-unstyled">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">川湘菜</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">麻辣烫/冒菜</a></li>
-                        </ul>
-                        <ul class="list-unstyled ">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">日韩料理</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">干锅/香锅</a></li>
-                        </ul>
-                        <ul class="list-unstyled">
-                            <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">自助餐</a></li>
-                            <li><a href="#" class="d-inline-block list_color on_visited p-1">咖啡</a></li>
-                        </ul>
-                    </div>
-                    <div class="d-none">
-                        <div class="d-flex ">
-                            <ul class="list-unstyled ">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1 ">烤鱼</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1 ">东北菜</a></li>
-                                <li><a href="#" class="d-inline-block list_color on_visited p-1">小龙虾</a></li>
-                            </ul>
-                            <ul class="list-unstyled">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">海鲜</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">东南亚菜</a></li>
-                                <li><a href="#" class="d-inline-block list_color on_visited p-1">鲁菜</a></li>
-                            </ul>
-                            <ul class="list-unstyled">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">酒吧</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">台湾菜/客家菜</a></li>
-                                <li><a href="#" class="d-inline-block list_color on_visited p-1">云贵菜</a></li>
-                            </ul>
-                            <ul class="list-unstyled">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">创意菜/私房菜</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">素食</a></li>
-                                <li><a href="#" class="d-inline-block list_color on_visited p-1">江浙菜</a></li>
-                            </ul>
-                            <ul class="list-unstyled ">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">粤菜</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">西北菜</a></li>
-                                <li><a href="#" class="d-inline-block list_color on_visited p-1">麻粥店</a></li>
-                            </ul>
-                            <ul class="list-unstyled">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">烤鸭</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">新疆菜</a></li>
-                                <li><a href="#" class="d-inline-block list_color on_visited p-1">徽菜</a></li>
-                            </ul>
-                            <ul class="list-unstyled">
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">北京菜</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">婚宴</a></li>
-                                <li class="pb-2"><a href="#" class="d-inline-block list_color on_visited p-1">其他美食</a></li>
-                            </ul>
+            <div class="border mb-3 ">
+                <div class="row mt-3 ">
+                    <div class="col-2">
+                        <div class="d-flex justify-content-around">
+                            <p class="text_color">分类</p>
+                            <p><a href="#" class="list_color on_visited p-1">全部</a></p>
                         </div>
                     </div>
-                </div>
-                <div class="col-2 my_small d-flex justify-content-end pr-5">
-                        <a href="#" class="list_color">更多</a><a class="more mt-2"></a>
-                    </div>
-            </div>
-            <hr>
-            <!--区域-->
-            <div class="row ">
-                <div class="col-2">
-                    <div class="d-flex justify-content-between">
-                        <p class="text_color">区域</p>
-                        <p><a href="#" class="list_color on_visited p-1">全部</a></p>
-                    </div>
-                </div>
-                <div class="col-10">
-                    <ul class="nav nav-tabs border-0 my_small mt-1">
-                        <li class="nav-item "><a href="#one" class="nav-link list_color pt-0 border-0 border-bottom area" data-toggle="tab">地铁附近</a></li>
-                        <li class="nav-item"><a href="#two" class="nav-link list_color pt-0 border-0 area" data-toggle="tab">行政区</a></li>
-                    </ul>
-                    <div class="tab-content  ">
-                        <div class="tab-pane border"  id="one">
-                            <ul class=" nav mt-3 my_small">
-                                <li class="nav-item "><a href="#three" class="nav-link list_color on_visited pt-0 pb-0 border-0" data-toggle="tab">1号线</a></li>
-                                <li class="nav-item"><a href="#four" class="nav-link list_color on_visited  pt-0 border-0" data-toggle="tab">2号线</a></li>
+                    <div class="col-8 my_small p-0">
+                        <div class="d-flex list-width">
+                            <ul class="list-unstyled ">
+                                <li class="pb-2"><a href="#" class="list_color on_visited p-1 ">中餐/家常菜</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">烧烤/烤肉</a></li>
                             </ul>
-
-                            <div class="tab-content">
-                                <hr class="m-0">
-                                <div class="tab-pane" id="three">
-                                    <ul class="nav tab-pane list-unstyled ml-2 my_small">
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >全部</a></li>
-                                        <li class="nav-item ml-4"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >天府广场站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >锦江宾馆站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >骡马市站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >文殊院站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >人民北路站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >倪家桥站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >省体育馆站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >桐梓林站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >华西坝站</a></li>
-                                        <li class="nav-item ml-2"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >火车南站</a></li>
-                                        <li class="nav-item ml-3"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >高新站</a></li>
-                                        <li class="nav-item ml-3"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >火车北站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >金融城站</a></li>
-                                        <li class="nav-item ml-2"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >孵化园站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >世纪城站</a></li>
-                                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 border-0" >升仙湖站</a></li>
-                                    </ul>
+                            <ul class="list-unstyled ">
+                                <li class="pb-2"><a href="#" class="list_color on_visited p-1">蛋糕</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">夏日饮品</a></li>
+                            </ul>
+                            <ul class="list-unstyled ">
+                                <li class="pb-2"><a href="products.html?kwords=火锅" class="list_color on_visited p-1">火锅</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">甜品</a></li>
+                            </ul>
+                            <ul class="list-unstyled ">
+                                <li class="pb-2"><a href="#" class="list_color on_visited p-1">小吃快餐</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">夏日饮品</a></li>
+                            </ul>
+                            <ul class="list-unstyled">
+                                <li class="pb-2"><a href="#" class="list_color on_visited p-1">川湘菜</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">麻辣烫/冒菜</a></li>
+                            </ul>
+                            <ul class="list-unstyled ">
+                                <li class="pb-2"><a href="#" class="list_color on_visited p-1">日韩料理</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">干锅/香锅</a></li>
+                            </ul>
+                            <ul class="list-unstyled">
+                                <li class="pb-2"><a href="#" class="list_color on_visited p-1">自助餐</a></li>
+                                <li><a href="#" class="list_color on_visited p-1">咖啡</a></li>
+                            </ul>
+                        </div>
+                        <div v-show="dis.dis1" >
+                            <div class="d-flex list-width">
+                                <ul class="list-unstyled ">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1 ">烤鱼</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1 ">东北菜</a></li>
+                                    <li><a href="#" class="list_color on_visited p-1">小龙虾</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">海鲜</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">东南亚菜</a></li>
+                                    <li><a href="#" class="list_color on_visited p-1">鲁菜</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">酒吧</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">台湾菜/客家菜</a></li>
+                                    <li><a href="#" class="list_color on_visited p-1">云贵菜</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">创意菜/私房菜</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">素食</a></li>
+                                    <li><a href="#" class="list_color on_visited p-1">江浙菜</a></li>
+                                </ul>
+                                <ul class="list-unstyled ">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">粤菜</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">西北菜</a></li>
+                                    <li><a href="#" class="list_color on_visited p-1">麻粥店</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">烤鸭</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">新疆菜</a></li>
+                                    <li><a href="#" class="list_color on_visited p-1">徽菜</a></li>
+                                </ul>
+                                <ul class="list-unstyled">
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">北京菜</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">婚宴</a></li>
+                                    <li class="pb-2"><a href="#" class="list_color on_visited p-1">其他美食</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="col-2 my_small d-flex justify-content-end pr-5">
+                        <a @click="show(1)" href="#" class="list_color"  v-cloak>{{more.more1}}<img :src="img.src1" alt="" class="pl-2"></a>
+                    </div>
+                </div>
+                <hr>
+                <!--区域-->
+                <div class="row ">
+                    <div class="col-2">
+                        <div class="d-flex justify-content-around">
+                            <p class="text_color">区域</p>
+                            <p><a href="#" class="list_color on_visited p-1">全部</a></p>
+                        </div>
+                    </div>
+                    <div class="col-10 list-width">
+                        <ul class="nav border-0 my_small mt-1">
+                            <li ><a href="#one" class="list_color area-sub" data-toggle="tab">地铁附近</a></li>
+                            <li ><a href="#two" class="list_color area-sub" data-toggle="tab">行政区</a></li>
+                        </ul>
+                        <div class="tab-content  mb-2 mt-2">
+                            <div class="tab-pane border mt-1 bg-light mr-2"  id="one">
+                                <ul class=" nav my_small position-relative">
+                                    <li class="p-3"><a href="#three" class="list_color on_visited pl-1 pr-1 " data-toggle="tab">1号线</a></li>
+                                    <li class="p-3"><a href="#four" class="list_color on_visited pl-1 pr-1 " data-toggle="tab">2号线</a></li>
+                                    <div class="menu-top2 "></div>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="three">
+                                        <ul class="nav  list-unstyled ml-2 mr-2 my_small border-top">
+                                            <li class="p-2"><a href="#" class="list_color on_visited   pl-1 pr-1" >全部</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >天府广场站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1 " >锦江宾馆站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >骡马市站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >文殊院站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pt-0 border-0" >人民北路站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >倪家桥站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >省体育馆站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >桐梓林站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >华西坝站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >火车南站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >高新站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >火车北站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >金融城站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >孵化园站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >世纪城站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >升仙湖站</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane" id="four">
+                                        <ul class="nav  list-unstyled ml-2 mr-2 my_small border-top">
+                                            <li class="p-2"><a href="#" class="list_color on_visited   pl-1 pr-1" >全部</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >春熙路站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1 " >蜀汉路东站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >白果林站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >东门大桥站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pt-0 border-0" >天府广场站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >通惠门站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >成渝立交站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1 text-truncate" >中医大省医院站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >惠王陵站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >洪河站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >牛王庙站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >一品天下站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >人民公园站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >牛市口站</a></li>
+                                            <li class="p-2"><a href="#" class="list_color on_visited pl-1 pr-1" >成都东客站</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane border"  id="two">
-                            <ul class=" nav mt-3 my_small">
-                                <li class="nav-item "><a href="#" class="nav-link list_color on_visited pt-0 pb-0 border-0" >武侯区</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link list_color on_visited  pt-0 pb-0 border-0" >锦江区</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link list_color on_visited  pt-0 pb-0 border-0" >青羊区</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link list_color on_visited  pt-0 pb-0 border-0" >成华区</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link list_color on_visited  pt-0 pb-0 border-0" >双流</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link list_color on_visited  pt-0 pb-0 border-0">金牛区</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link list_color on_visited  pt-0 pb-0 border-0">龙泉驿区</a></li>
-                            </ul>
+                            <div class="tab-pane border mt-1 bg-light mr-2"  id="two">
+                                <ul class="d-flex list-unstyled justify-content-around my_small p-3 position-relative mb-0">
+                                    <li ><a href="#" class="list_color on_visited " >武侯区</a></li>
+                                    <li ><a href="#" class="list_color on_visited  " >锦江区</a></li>
+                                    <li><a href="#" class="list_color on_visited  " >青羊区</a></li>
+                                    <li ><a href="#" class="list_color on_visited " >成华区</a></li>
+                                    <li ><a href="#" class="list_color on_visited " >双流</a></li>
+                                    <li><a href="#" class="list_color on_visited ">金牛区</a></li>
+                                    <li ><a href="#" class="list_color on_visited ">龙泉驿区</a></li>
+                                    <li class="pl-5"> <a @click="show(2)" href="#" class="list_color"  v-cloak>{{more.more2}}<img :src="img.src2" alt="" class="pl-2"></a></li>
+                                    <div class="menu-top3 "></div>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-                 <hr>
-            <!--价格-->
-            <div class="row">
-                <div class="col-2">
-                    <div class="d-flex justify-content-between">
-                        <p class="text_color">价格</p>
-                        <p><a href="#" class="list_color on_visited p-1">全部</a></p>
+                <hr>
+                <!--价格-->
+                <div class="row">
+                    <div class="col-2">
+                        <div class="d-flex justify-content-around">
+                            <p class="text_color">价格</p>
+                            <p><a href="#" class="list_color on_visited p-1">全部</a></p>
+                        </div>
+                    </div>
+                    <div class="col-10 list-width">
+                        <ul class="nav my_small mt-1">
+                            <li><a href="#" class="list_color on_visited ">50元以下</a></li>
+                            <li><a href="#" class="list_color on_visited ">50-100元</a></li>
+                            <li><a href="#" class="list_color on_visited ">100-200元</a></li>
+                            <li ><a href="#" class="list_color on_visited ">200-300元</a></li>
+                            <li><a href="#" class="list_color on_visited ">300元以上</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="col-10">
-                    <ul class="nav my_small mt-1">
-                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 pb-0">50元以下</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 pb-0">50-100元</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 pb-0">100-200元</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 pb-0">200-300元</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link list_color on_visited pt-0 pb-0">300元以上</a></li>
-                    </ul>
-                </div>
-            </div>
             </div>
             <!--商品列表-->
-                <!--标题-->
-            <div class="row bg-light m-0 border">
-                <div class="col-4 p-0">
-                    <ul class="nav ">
-                        <li class="nav-item "><a href="#" class="nav-link list_color bg-white border-0 ">综合榜</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link list_color">热销榜</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link list_color">新品榜</a></li>
-                    </ul>
+            <!--标题-->
+            <div >
+                <div class="row bg-light m-0 border border-bottom-0">
+                    <div class="col-4 p-0">
+                        <ul class="nav ">
+                            <li class="nav-item "><a href="#" class="nav-link list_color bg-white pb-3">综合榜</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link list_color">热销榜</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link list_color">新品榜</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-8  d-flex justify-content-between align-items-center">
+                        <ul class="nav">
+                            <li class="nav-item d-flex align-items-center "><input type="checkbox" ><a href="#" class="pr-3 text-muted">免预约</a></li>
+                            <li class="nav-item d-flex align-items-center "><input type="checkbox"><a href="#" class="pr-3 text-muted">优惠券</a></li>
+                            <li class="nav-item d-flex align-items-center"><input type="checkbox"><a href="#" class="pr-3 text-muted">精选品牌</a></li>
+                        </ul>
+                        <p class="mb-0 d-flex align-items-center"><img src="img/product/le-arrow-down_f7b3b5b.png" alt=""><span class="pl-1 pr-1">1/2 </span><img src="img/product/re-arrow-down_d9805e9.png" alt=""></p>
+                    </div>
                 </div>
-                <div class="col-8  d-flex justify-content-between align-items-center">
-                    <ul class="nav">
-                        <li class="nav-item d-flex align-items-center mr-2"><input type="checkbox" ><a href="#" class="text-muted">免预约</a></li>
-                        <li class="nav-item d-flex align-items-center mr-2"><input type="checkbox"><a href="#" class="text-muted">优惠券</a></li>
-                        <li class="nav-item d-flex align-items-center"><input type="checkbox"><a href="#" class="text-muted">精选品牌</a></li>
-                    </ul>
-                    <p class="mb-0 d-flex">1/2<span class="my_select2 mt-1 ml-2"></span></p>
-                </div>
+                <!--主体-->
+                <ul class="list-group">
+                    <li v-for="p in products" class="list-group-item " v-cloak>
+                        <a :href="'detail.html?lid='+p.lid" target="_blank">
+                            <div class="row">
+                                <div class="col-3 "><img :src="p.md" alt="" class="w-100"></div>
+                                <div class="col-9">
+                                    <h5 class="font-weight-bold text-dark ">{{p.title}}</h5>
+                                    <p class="text-muted my_small ">人均 ￥{{p.price}} <span class="p-2 pr-3">|</span>{{p.area}}</p>
+                                    <p class="my_color my_small ">{{p.rank}}</p>
+                                    <p class="text-muted list_color">{{p.serve}}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
             </div>
-                <!--主题-->
-            <ul class="list-group">
-                <li class="list-group-item border-top-0">
-                    <a  href="detail.html">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3"><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9  ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3"><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3"><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3 "><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a  href="#">
-                        <div class="row">
-                            <div class="col-3"><img src="img/product/1.jpg" alt="" class="w-100"></div>
-                            <div class="col-9 ">
-                                <h5 class="font-weight-bold text-dark ">醉烧刀海鲜美食汇(春熙Village店)</h5>
-                                <p class="text-muted my_small ">人均 ￥108 <span class="p-2 pr-3">|</span>春熙路</p>
-                                <p class="my_color my_small ">锦江区美食销量第2名</p>
-                                <p class="text-muted list_color">醉烧刀单人海鲜美食自助1份！免费WIFI</p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <p>共<span class="my_color">712</span>条</p>
-                <!--分页-->
-            <ul class="pagination justify-content-center mb-5">
-                <li class="page-item"><a href="#" class="page-link">首页</a></li>
-                <li class="page-item"><a href="#" class="page-link">上一页</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">4</a></li>
-                <li class="page-item"><a href="#" class="page-link">下一页</a></li>
+            <p v-cloak>共<span class="my_color" >{{count}}</span>条</p>
+            <!--分页-->
+            <ul class="pagination justify-content-center mb-5" v-cloak>
+                <li class="page-item" :class="prevOne" @click="prev()"><a href="#" class="page-link">上一页</a></li>
+                <li v-for="i in pageCount" class="page-item" :class="i==pno+1?'active':''"><a href="#" class="page-link" @click="jump(i)">{{i}}</a></li>
+                <li class="page-item" @click="next()" :class="nextOne"><a href="#" class="page-link">下一页</a></li>
             </ul>
         </div>
         <div class="col-3">
@@ -427,6 +266,6 @@
 <script src="js/jquery-1.11.3.js"></script>
 <script src="js/header.js"></script>
 <script src="js/footer.js"></script>
-<script src="js/vue.js"></script>
+<script src="js/products.js"></script>
 </body>
 </html>

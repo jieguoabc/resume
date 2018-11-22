@@ -1,22 +1,65 @@
 
 <header id="header">
     <!-- 顶部 -->
-    <div class="b_bg ">
-        <div class="top_width d-flex justify-content-between b_bg">
+    <div class="b_bg m-0 pt-1 pb-1">
+        <div class="top_width d-flex justify-content-between">
             <ul v-if="!islogin" class="nav justify-content-center my_small">
-                <li class="nav-item pt-2 text_color">Hi, <span>欢迎来到百度糯米</span></li>
-                <li class="nav-item"><a :href="signin"  class="nav-link my_color">请登录</a></li>
+                <li class="nav-item pt-2 text_color">Hi,<span class="pl-2">欢迎来到百度糯米</span></li>
+                <li class="nav-item"><a href="#" :href="signin" class="nav-link my_color">请登录</a></li>
                 <li class="nav-item"><a href="register.html" class="nav-link ">免费注册</a></li>
             </ul>
             <ul v-else class="nav justify-content-center my_small">
                 <li class="nav-item pt-2 text_color">Hi,<span v-text="uname" class="pl-1"></span></li>
-                <li class="nav-item"><a href="#" class="nav-link text_color" @click.prevent="signout()">退出</a></li>
+                <li class="nav-item"><a href="#" class="nav-link " @click.prevent="signout()">退出</a></li>
             </ul>
             <ul class="nav my_small">
                 <li class="nav-item"><a href="#" class="nav-link ">个人中心</a></li>
-                <li class="nav-item d-flex align-items-center"><a href="#" class="nav-link pr-0" >最近浏览 </a><span class="my_select mt-1 mr-3"></span><span class="shu">|</span></li>
-                <li class="nav-item d-flex align-items-center"><a href="#" class="nav-link pr-0">糯米APP</a><span class="my_select mt-1  mr-3"></span><span class="shu">|</span></li>
-                <li class="nav-item d-flex align-items-center"><a href="#" class="nav-link pr-0 ">我是商家</a><span class="my_select mt-1 "></li>
+                <li  @mouseover="show(1)" @mouseout="hide(1)" class="nav-item d-flex align-items-center position-relative">
+                    <a href="#" class="nav-link pr-0 position-relative" >
+                        <span >最近浏览</span>
+                    </a>
+                    <div v-show="display.display1" class="menu1 position-absolute bg-white">
+                        <a class="h_bg media p-3 mt-2">
+                            <img src="img/index/menu/1.jpg" alt="">
+                            <div class="media-body pl-2">
+                                <h6 class="font-weight-normal text-truncate">wego纯kKTV(锦华万达店)</h6>
+                                <p class="pt-4">人均￥109.5  锦华万达广场店</p>
+                            </div>
+                        </a>
+                        <a class="h_bg media p-3">
+                            <img src="img/index/menu/2.jpg" alt="">
+                            <div class="media-body pl-2" >
+                                <h6 class="font-weight-normal text-truncate pt-1">wego纯kKTV(锦华万达店)</h6>
+                                <p class="pt-4">人均￥109.5  锦华万达广场店</p>
+                            </div>
+                        </a>
+                        <a class="h_bg media p-3">
+                            <img src="img/index/menu/3.jpg" alt="">
+                            <div class="media-body pl-2">
+                                <h6 class="font-weight-normal text-truncate">wego纯kKTV(锦华万达店)</h6>
+                                <p class="pt-4">人均￥109.5  锦华万达广场店</p>
+                            </div>
+                        </a>
+                        <p class="text-center"><a href="#">清空浏览记录</a></p>
+                        <div class="menu-top "></div>
+                    </div>
+                    <a href="#"><img src="img/header/re-arrow-down_f7b3b5b.png" alt=""></a><span class="shu pl-3">|</span></li>
+                <li  @mouseover="show(2)" @mouseout="hide(2)" class="nav-item d-flex align-items-center position-relative">
+                    <a href="#" class="nav-link pr-0">糯米APP</a>
+                    <div  v-show="display.display2" class="menu2 position-absolute bg-white p-3">
+                        <img src="img/index/menu/4.png" alt="">
+                        <div class="menu-top "></div>
+                    </div>
+                    <a href="#"><img src="img/header/re-arrow-down_f7b3b5b.png" alt=""></a>
+                </li>
+                <li @mouseover="show(3)" @mouseout="hide(3)" class="nav-item d-flex align-items-center position-relative">
+                    <a href="#" class="nav-link pr-0 ">我是商家</a>
+                    <div  v-show="display.display3" class="menu3 position-absolute bg-white p-3">
+                        <p><a href="#">用户中心</a></p>
+                        <p class="mb-0"><a href="#">我想合作</a></p>
+                        <div class="menu-top "></div>
+                    </div>
+                    <a href="#"><img src="img/header/re-arrow-down_f7b3b5b.png" alt=""></a><span class="shu pl-3">|</span></li>
                 <li class="nav-item"><a href="#" class="nav-link ">帮助中心</a></li>
                 <li class="nav-item"><a href="#" class="nav-link ">食品安全</a></li>
             </ul>
@@ -26,10 +69,39 @@
         <!-- 搜索框行 -->
         <div class="d-flex align-items-center clearfix">
             <a href="index.html"><img src="img/header/1538539305(1).jpg" alt="" class="mr-4"></a>
-            <div class="d-flex pt-4 mr-5 clearfix">成都 <span class="zhuan font-weight-bold ml-1"><</span></div>
+            <div @mouseover="morecity"  @mouseout="lesscity" href="#" class="city  pt-4 mr-5 " >
+                    <span class="area"></span>
+                    <span class="text-dark">成都</span>
+                    <span class="down"></span>
+                    <div v-show="city"  class="city-dropdown">
+                        <h6 class="text-dark">热门城市</h6> 
+                        <ul class="city-list">
+                            <li ><a href="#">北京</a></li>
+                            <li><a href="#">上海</a></li>
+                            <li ><a href="#">广州</a></li>
+                            <li><a href="#">深圳</a></li>
+                            <li><a href="#">天津</a></li>
+                            <li ><a href="#">杭州</a></li>
+                            <li><a href="#">西安</a></li>
+                            <li><a href="#">成都</a></li>
+                            <li><a href="#">郑州</a></li>
+                            <li><a href="#">厦门</a></li>
+                            <li><a href="#">青岛</a></li>
+                            <li><a href="#">太原</a></li>
+                            <li><a href="#">重庆</a></li>
+                            <li><a href="#">武汉</a></li>
+                            <li><a href="#">南京</a></li>
+                            <li><a href="#">沈阳</a></li>
+                            <li><a href="#">济南</a></li>
+                            <li><a href="#">哈尔滨</a></li>
+                        </ul>
+                        <a href="#" class="morecity">更多城市 <span>></span></a>
+                        <div class="menu_city"></div>
+                    </div>  
+                </div>
             <div id="search" class="pt-4 mt-3">
                 <div class=" h_input ml-3 ">
-                    <input v-model="kword" @keyup.13="search()" class="border-0 p-0 my_small ml-2" type="text" placeholder="搜索商家/地点">
+                    <input v-model="kword" @keyup.13="search()" class="border-0 p-0 my_small ml-2 " type="text" placeholder="搜索商家/地点">
                     <button @click="search()" class="border-0 text-white float-right button">搜索</button>
                 </div>
                 <ul class="nav my_small text-muted">
@@ -41,65 +113,347 @@
                 </ul>
             </div>
             <ul class="nav right_h ml-3 mt-1">
-                <li class="nav-item d-flex align-items-center right_color border-right-0"><a href="#" class="nav-link"><img src="img/header/1538542952(1).jpg" alt=""></a><span class="shu">|</span></li>
-                <li class="nav-item d-flex align-items-center right_color border-left-0 border-right-0"><a href="#" class="nav-link"><img src="img/header/1538542971(1).jpg" alt=""></a><span class="shu">|</span></li>
-                <li class="nav-item right_color border-left-0"><a href="#" class="nav-link"><img src="img/header/1538542992(1).jpg" alt=""></a></li>
+                <li class="nav-item d-flex align-items-center right_color border-right-0"><a href="#" class="nav-link"><img src="img/header/tui_93de3ec.png" alt=""></a><span class="shu">|</span></li>
+                <li class="nav-item d-flex align-items-center right_color border-left-0 border-right-0"><a href="#" class="nav-link"><img src="img/header/pei_6ab04b5.png" alt=""></a><span class="shu">|</span></li>
+                <li class="nav-item right_color border-left-0"><a href="#" class="nav-link"><img src="img/header/money_44a4950.png" alt=""></a></li>
             </ul>
         </div>
         <div class="d-flex mt-3">
             <!--左侧折叠导航栏-->
-            <div  class="mt-1">
-                <nav class="navbar nav_top p-0 pl-1 navbar-dark">
+            <div @mouseover="show1()" @mouseout="hide1()" class="mt-1">
+                <nav  class="navbar nav_top p-0 pl-1  pt-1 pb-1 navbar-dark">
                     <a href="#" class="navbar-brand"><h6 class="mb-0 pl-1 ">全部分类</h6></a>
-                    <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#main">
+                    <button class="navbar-toggler border-0 out" type="button" data-toggle="collapse" >
                         <!--在小屏幕下按钮上的三条短横线效果-->
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </nav>
-                <div id="main" class="nav_middle bg-dark collapse pl-2">
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#">酒店</a></h6>
-                        <p><a href="#" >成都/</a><a href="#" >北京/</a><a href="#" >上海</a></p>
+                <div v-show="da" class="nav_middle bg-dark  " >
+                    <div class="level-item">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2 ">
+                            <h6><a href="#">酒店</a></h6>
+                            <p><a href="#" >成都/</a><a href="#" >北京/</a><a href="#" >上海</a></p>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#" >旅游</a></h6>
-                        <p><a href="#" >目的地攻略/</a><a href="#" >行程计划</a></p>
+                    <div class="level-item" @mouseover="more(1)" @mouseout="less(1)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="#" >旅游</a></h6>
+                            <p><a href="#" >目的地攻略/</a><a href="#" >行程计划</a></p>
+                        </div>
+                        <div v-show="num.num1" class=" right-detail position-absolute bg-white pt-3">
+                            <div class="row m-0 mr-3">
+                                <h6 class="col-2 mt-2 pl-4">旅游</h6>
+                                <ul class="list-unstyled col-3 pb-3">
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">目的地攻略</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-3 pb-3">
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">行程计划</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-3 pb-3">
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">游记</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#" >电影</a></h6>
-                        <p><a href="#" >看影片/</a><a href="#" >找影院</a></p>
+                    <div class="level-item" @mouseover="more(2)" @mouseout="less(2)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="#" >电影</a></h6>
+                            <p><a href="#" >看影片/</a><a href="#" >找影院</a></p>
+                        </div>
+                        <div v-show="num.num2" class=" right-detail position-absolute bg-white pt-3">
+                            <div class="row m-0 pr-3">
+                                <h6 class="col-2">热门影片</h6>
+                                <ul class="list-unstyled col-5 dash-bottom pb-3">
+                                    <li class=" mb-1"><a href="#">目胡桃夹子和四个国王</a></li>
+                                    <li class=" mb-1"><a href="#" >铁血战士</a></li>
+                                    <li class=" mb-1"><a href="#" >冰封侠：时空行者</a></li>
+                                    <li class=" mb-1"><a href="#" >滴答屋</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-5 dash-bottom  pb-3">
+                                    <li  class=" mb-1"><a href="#">毒液：致命守护者</a></li>
+                                    <li class=" mb-1"><a href="#" >飓风奇劫</a></li>
+                                    <li class=" mb-1"><a href="#" >流浪猫鲍勃</a></li>
+                                    <li class=" mb-1"><a href="#" >无双</a></li>
+                                </ul>
+                            </div>
+                            <div class="row m-0 pr-3">
+                                <h6 class="col-2">热门院线</h6>
+                                <ul class="list-unstyled col-5 pb-3">
+                                    <li  class=" mb-1"><a href="#">成都万达影城SM广场店</a></li>
+                                    <li class=" mb-1"><a href="#" >万达影城（锦华万达广场店）</a></li>
+                                    <li class=" mb-1"><a href="#" >SCF上影影城（成都龙湖IMAX店）</a></li>
+                                    <li class=" mb-1"><a href="#" >成都金逸IMAX影城鹏瑞利店</a></li>
+                                    <li class=" mb-1"><a href="#" >成都万达影城金沙广场店</a></li>
+                                </ul>
+                                <ul class="list-unstyled col-5 pb-3">
+                                    <li  class=" mb-1"><a href="#">万达影城（成都金牛万达广场店）</a></li>
+                                    <li class=" mb-1"><a href="#" >星美影商城（成都环球IMAX店）</a></li>
+                                    <li class=" mb-1"><a href="#" >成都万达影城财富广场店</a></li>
+                                    <li class=" mb-1"><a href="#" >卢米埃影城（龙湖北城天街店）</a></li>
+                                    <li class=" mb-1"><a href="#" >成都万达硬化层新都和顺广场店</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#" >休闲娱乐</a></h6>
-                        <p><a href="#" >ktv</a></p>
+                    <div class="level-item" @mouseover="more(3)" @mouseout="less(3)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="#" >休闲娱乐</a></h6>
+                            <p><a href="#" >ktv</a></p>
+                        </div>
+                        <div v-show="num.num3" class="right-detail position-absolute bg-white pt-3">
+                            <div class="row m-0 pr-3">
+                                <h6 class="col-2">休闲娱乐</h6>
+                                <div class="col-10 row m-0">
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">温泉洗浴</a></li>
+                                        <li class=" mb-1"><a href="#" >采摘</a></li>
+                                        <li class=" mb-1"><a href="#" >DIY手工</a></li>
+                                        <li class=" mb-1"><a href="#" >其他娱乐活动</a></li>
+                                        <li class=" mb-1"><a href="#" >游乐园/水上乐园</a></li>
+                                        <li class=" mb-1"><a href="#" >轰趴馆</a></li>
+                                        <li class=" mb-1"><a href="#" >画室画廊</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">KTV</a></li>
+                                        <li class=" mb-1"><a href="#" >私人影院</a></li>
+                                        <li class=" mb-1"><a href="#" >密室逃脱</a></li>
+                                        <li class=" mb-1"><a href="#" >游泳</a></li>
+                                        <li class=" mb-1"><a href="#" >录影棚</a></li>
+                                        <li class=" mb-1"><a href="#" >网吧网咖</a></li>
+                                        <li class=" mb-1"><a href="#" >台球</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">足疗按摩</a></li>
+                                        <li class=" mb-1"><a href="#" >私桌游</a></li>
+                                        <li class=" mb-1"><a href="#" >真人CS</a></li>
+                                        <li class=" mb-1"><a href="#" >滑雪/滑冰</a></li>
+                                        <li class=" mb-1"><a href="#" >运动健身</a></li>
+                                        <li class=" mb-1"><a href="#" >VR体验馆</a></li>
+                                        <li class=" mb-1"><a href="#" >展览</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">文化艺术</a></li>
+                                        <li class=" mb-1"><a href="#" >电玩/游戏币</a></li>
+                                        <li class=" mb-1"><a href="#" >卡丁车</a></li>
+                                        <li class=" mb-1"><a href="#" >养生保健</a></li>
+                                        <li class=" mb-1"><a href="#" >演出赛事</a></li>
+                                        <li class=" mb-1"><a href="#" >玩酷</a></li>
+                                        <li class=" mb-1"><a href="#" >同城活动</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#" >结婚</a></h6>
-                        <p ><a href="#" >婚纱摄影/</a><a href="#" >婚庆服务</a></p>
+                    <div class="level-item" @mouseover="more(4)" @mouseout="less(4)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="#" >结婚</a></h6>
+                            <p ><a href="#" >婚纱摄影/</a><a href="#" >婚庆服务</a></p>
+                        </div>
+                        <div v-show="num.num4">
+                            <div class="right-detail position-absolute bg-white d-flex pt-3">
+                                <h6 class="pt-2 pl-4 pr-4">结婚</h6>
+                                <ul class="nav ">
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">婚纱摄影</a></li>
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">婚庆服务</a></li>
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">婚纱礼服</a></li>
+                                    <li class="nav-item mb-1"><a href="#" class="nav-link">个性写真</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#">生活服务</a></h6>
-                        <p><a href="#" >配镜/</a><a href="#" >鲜花</a></p>
+                    <div class="level-item"  @mouseover="more(5)" @mouseout="less(5)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="#">生活服务</a></h6>
+                            <p><a href="#" >配镜/</a><a href="#" >鲜花</a></p>
+                        </div>
+                        <div v-show="num.num5" class=" right-detail position-absolute bg-white pt-3"><div class="row m-0 pr-3">
+                                <h6 class="col-2">生活服务</h6>
+                                <div class="col-10 row m-0">
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">宠物服务</a></li>
+                                        <li class=" mb-1"><a href="#" >其他生活服务</a></li>
+                                        <li class=" mb-1"><a href="#" >亲子</a></li>
+                                        <li class=" mb-1"><a href="#" >婚庆服务</a></li>
+                                        <li class=" mb-1"><a href="#" >家政服务</a></li>
+                                        <li class=" mb-1"><a href="#" >保健品</a></li>
+                                        <li class=" mb-1"><a href="#" >婚纱礼服</a></li>
+                                        <li class=" mb-1"><a href="#" >家电维修</a></li>
+                                        <li class=" mb-1"><a href="#" >建材家居</a></li>
+                                        <li class=" mb-1"><a href="#" >宠物猫</a></li>
+                                        <li class=" mb-1"><a href="#" >其他宠物服务</a></li>
+                                        <li class=" mb-1"><a href="#" >家装</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">教育培训</a></li>
+                                        <li class=" mb-1"><a href="#" >婚纱摄影</a></li>
+                                        <li class=" mb-1"><a href="#" >配镜</a></li>
+                                        <li class=" mb-1"><a href="#" >本地购物</a></li>
+                                        <li class=" mb-1"><a href="#" >鲜花</a></li>
+                                        <li class=" mb-1"><a href="#" >医疗器械</a></li>
+                                        <li class=" mb-1"><a href="#" >珠宝首饰</a></li>
+                                        <li class=" mb-1"><a href="#" >开锁</a></li>
+                                        <li class=" mb-1"><a href="#" >搬家服务</a></li>
+                                        <li class=" mb-1"><a href="#" >花鸟鱼虫</a></li>
+                                        <li class=" mb-1"><a href="#" >皮衣护理</a></li>
+                                        <li class=" mb-1"><a href="#" >证件照</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">儿童摄影</a></li>
+                                        <li class=" mb-1"><a href="#" >个性写真</a></li>
+                                        <li class=" mb-1"><a href="#" >服装定制</a></li>
+                                        <li class=" mb-1"><a href="#" >照片服务</a></li>
+                                        <li class=" mb-1"><a href="#" >充值服务</a></li>
+                                        <li class=" mb-1"><a href="#" >旅拍婚纱</a></li>
+                                        <li class=" mb-1"><a href="#" >绿植</a></li>
+                                        <li class=" mb-1"><a href="#" >管道疏通</a></li>
+                                        <li class=" mb-1"><a href="#" >闪送超市</a></li>
+                                        <li class=" mb-1"><a href="#" >宠物店服务</a></li>
+                                        <li class=" mb-1"><a href="#" >皮包护理</a></li>
+                                        <li class=" mb-1"><a href="#" >DIY台历</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3 pb-3">
+                                        <li class=" mb-1"><a href="#">口腔</a></li>
+                                        <li class=" mb-1"><a href="#" >体检</a></li>
+                                        <li class=" mb-1"><a href="#" >洗衣</a></li>
+                                        <li class=" mb-1"><a href="#" >照片冲印</a></li>
+                                        <li class=" mb-1"><a href="#" >药品</a></li>
+                                        <li class=" mb-1"><a href="#" >美瞳</a></li>
+                                        <li class=" mb-1"><a href="#" >皮质家具护理</a></li>
+                                        <li class=" mb-1"><a href="#" >家装设计</a></li>
+                                        <li class=" mb-1"><a href="#" >宠物狗</a></li>
+                                        <li class=" mb-1"><a href="#" >宠物用品食品</a></li>
+                                        <li class=" mb-1"><a href="#" >洗鞋</a></li>
+                                        <li class=" mb-1"><a href="#" >海报制作</a></li>
+                                    </ul>
+                                </div>
+                            </div></div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2r">
-                        <h6><a href="product.html" >美食</a></h6>
-                        <p><a href="#" >自助餐/</a><a href="#" >小吃快餐/</a><a href="#" >火锅</a></p>
+                    <div class="level-item" @mouseover="more(6)" @mouseout="less(6)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="products.html?kwords=美食" >美食</a></h6>
+                            <p><a href="products.html?kwords=自助餐" >自助餐/</a><a href="products.html?kwords=小吃快餐" >小吃快餐/</a><a href="products.html?kwords=火锅" >火锅</a></p>
+                        </div>
+                        <div v-show="num.num6" class=" right-detail position-absolute bg-white pt-3">
+                                <div class="row m-0 pr-3">
+                                    <h6 class="col-2">热门分类</h6>
+                                    <div class="col-10 row m-0">
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li class=" mb-1"><a href="#">其他美食</a></li>
+                                            <li class=" mb-1"><a href="#" >海鲜</a></li>
+                                            <li class=" mb-1"><a href="#" >蛋糕</a></li>
+                                            <li class=" mb-1"><a href="#" >小龙虾</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li  class=" mb-1"><a href="#">火锅</a></li>
+                                            <li class=" mb-1"><a href="#" >烧烤/烤肉</a></li>
+                                            <li class=" mb-1"><a href="#" >咖啡</a></li>
+                                            <li class=" mb-1"><a href="#" >酒吧</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li  class=" mb-1"><a href="#">小吃快餐</a></li>
+                                            <li class=" mb-1"><a href="#" >干锅/香锅</a></li>
+                                            <li class=" mb-1"><a href="#" >婚宴</a></li>
+                                            <li class=" mb-1"><a href="#" >粥店</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li  class=" mb-1"><a href="#">自助餐</a></li>
+                                            <li class=" mb-1"><a href="#" >甜品</a></li>
+                                            <li class=" mb-1"><a href="#" >夏日饮品</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="row m-0 pr-3">
+                                    <h6 class="col-2">中国菜</h6>
+                                    <div class="col-10 row m-0">
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li class=" mb-1"><a href="#">粤菜</a></li>
+                                            <li class=" mb-1"><a href="#" >新疆菜</a></li>
+                                            <li class=" mb-1"><a href="#" >西北菜</a></li>
+                                            <li class=" mb-1"><a href="#" >徽菜</a></li>
+                                            <li class=" mb-1"><a href="#" >中餐/家常菜</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li  class=" mb-1"><a href="#">川湘菜</a></li>
+                                            <li class=" mb-1"><a href="#" >东北菜</a></li>
+                                            <li class=" mb-1"><a href="#" >素食</a></li>
+                                            <li class=" mb-1"><a href="#" >烤鱼</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li  class=" mb-1"><a href="#">江浙菜</a></li>
+                                            <li class=" mb-1"><a href="#" >云贵菜</a></li>
+                                            <li class=" mb-1"><a href="#" >创意菜/私房菜</a></li>
+                                            <li class=" mb-1"><a href="#" >烤鸭</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 dash-bottom pb-3">
+                                            <li  class=" mb-1"><a href="#">北京菜</a></li>
+                                            <li class=" mb-1"><a href="#" >鲁菜</a></li>
+                                            <li class=" mb-1"><a href="#" >台湾菜/客家菜</a></li>
+                                            <li class=" mb-1"><a href="#" >麻辣烫/冒菜</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="row m-0 pr-3">
+                                    <h6 class="col-2">外国菜</h6>
+                                    <div class="col-10 row m-0">
+                                        <ul class="list-unstyled col-3  pb-3">
+                                            <li class=" mb-1"><a href="#">日韩料理</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-3 pb-3">
+                                            <li  class=" mb-1"><a href="#">东南亚菜</a></li>
+                                        </ul>
+                                        <ul class="list-unstyled col-6  pb-3">
+                                            <li  class=" mb-1"><a href="#">西餐</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
                     </div>
-                    <div class="d-flex justify-content-between pt-2">
-                        <h6><a href="#" >丽人</a></h6>
-                        <p><a href="#">美发/</a><a href="#">美甲/</a><a href="#">美容SPA</a></p>
+                    <div class="level-item"  @mouseover="more(7)" @mouseout="less(7)">
+                        <div class="d-flex justify-content-between pt-2 pl-2 pr-2">
+                            <h6><a href="#" >丽人</a></h6>
+                            <p><a href="#">美发/</a><a href="#">美甲/</a><a href="#">美容SPA</a></p>
+                        </div>
+                        <div v-show="num.num7" class="right-detail position-absolute bg-white pt-3">
+                            <div class="row m-0 pr-3">
+                                <h6 class="col-2">丽人</h6>
+                                <div class="col-10 row m-0">
+                                    <ul class="list-unstyled col-3  pb-3">
+                                        <li class=" mb-1"><a href="#">美甲</a></li>
+                                        <li class=" mb-1"><a href="#" >其他丽人</a></li>
+                                        <li class=" mb-1"><a href="#" >美瞳</a></li>    
+                                    </ul>
+                                    <ul class="list-unstyled col-3  pb-3">
+                                        <li class=" mb-1"><a href="#">美发</a></li>
+                                        <li class=" mb-1"><a href="#" >美睫</a></li>
+                                        <li class=" mb-1"><a href="#" >美足</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3  pb-3">
+                                        <li class=" mb-1"><a href="#">美容SPA</a></li>
+                                        <li class=" mb-1"><a href="#" >瑜伽</a></li>
+                                        <li class=" mb-1"><a href="#" >医疗美容</a></li>
+                                    </ul>
+                                    <ul class="list-unstyled col-3  pb-3">
+                                        <li class=" mb-1"><a href="#">化妆</a></li>
+                                        <li class=" mb-1"><a href="#" >舞蹈</a></li>
+                                    </ul>
+                                </div>
+                             </div>    
+                        </div>
                     </div>
                 </div>
             </div>
             <!--右侧导航链接-->
-            <div class="bot_border w-100">
+            <div class="bot_border w-100 ">
                 <ul class="nav ">
-                    <li class="nav-item pl-3"><a href="#" class="nav-link my_a">首页</a></li>
+                    <li class="nav-item pl-3"><a href="index.heml" class="nav-link my_a">首页</a></li>
                     <li class="nav-item pl-3"><a href="#" class="nav-link pr-0 my_a" >酒店 </a></li>
-                    <li class="nav-item pl-4 d-flex align-items-center"><a href="#" class="nav-link pr-0 my_a">出行</a><span class="my_select mt-1  mr-3"></span></li>
-                    <li class="nav-item pl-3"><a href="#" class="nav-link pr-0 my_a">电影</a></li>
+                    <li class="nav-item pl-3"><a href="#" class="nav-link pr-0 my_a">出行</a></li>
+                    <li class="nav-item pl-3"><a href="#" class="nav-link pr-0 my_a">电影 <img src="img/header/icon-hot_beb2af6.png" alt="" class="pb-3"></a></li>
                     <li class="nav-item pl-3"><a href="#" class="nav-link my_a">结婚</a></li>
-                    <li class="nav-item pl-3"><a href="#" class="nav-link my_a">外卖</a></li>
+                    <li class="nav-item pl-3"><a href="http://waimai.baidu.com/waimai?qt=find&utm_source=bainuo&utm_medium=nav&utm_content=toububiaoqian&utm_term=default&utm_campaign=chengdu&cid=PC_%E5%93%81%E7%89%8C%E6%8E%A8%E5%B9%BF_940766" class="nav-link my_a">外卖</a></li>
                 </ul>
             </div>
         </div>

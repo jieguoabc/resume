@@ -11,55 +11,71 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/qs.min.js"></script>
     <title>Title</title>
 
 </head>
 <body>
-  <div class="container">
-      <div class="d-flex justify-content-between mt-4">
+  <div id="main" class="reg_width">
+      <div class="d-flex justify-content-between mt-4 ml-3 mr-3">
            <div class="ml-5">
-               <a href="#" class="d-flex align-items-center justify-content-center">
+               <a href="index.html" class="logo ">
                    <img src="img/register/logo-nuomi.png" alt="">
-                   <h3 class="text-muted mr-2 font-weight-normal">|</h3>
-                   <h5 class="text-muted mt-1">注册百度账号</h5>
+                   <h5 class="text-muted mt-1 border-left pl-3 mb-0 ">注册百度账号</h5>
                </a>
            </div>
            <div class="mr-5 mt-2">
-               <span class="text-muted my_small">我已注册，现在就</span><button class="btn btn-light border border-light ml-1 text-muted"><b>登录</b></button>
+               <span class="text-muted my_small">我已注册，现在就</span><a href="login.html" class="btn btn-light border border-light ml-1 text-muted">登录</a>
            </div>
        </div>
       <div class="mt-2 my_green"> </div>
-      <div class="d-flex justify-content-between mt-5">
-          <div class="ml-5">
-              <div class="d-flex mb-4 align-items-center">
-                  <p class="font-weight-bold m-0">用户名</p>
-                  <div class="ml-2"><input type="text" placeholder="请设置用户名" class="form-control p-2 my_input"></div>
-                  <span class="my_small d-none">设置后，不可更改，中英文均可</span>
+      <div class="d-flex justify-content-between mt-5 ml-3 mr-2">
+          <div class="ml-5 " @keyup.13="reg">
+              <div  class="d-flex mb-3 align-items-center position-relative">
+                  <label for="uname" class="font-weight-bold">用户名</label>
+                  <input v-focus v-model="uname" @click="getUname" @blur="loseUname" type="text" id="uname" name="uname" placeholder="请设置用户名" class="my_input" :class="border.name">
+                  <span v-show="del.name" class="clear" @click="clearName"></span>
+                  <span v-show="msg.name" class="more_small text-muted" v-text="nameMsg" :class="[err.name,right.name]" ></span>
               </div>
-              <div class="d-flex mb-4 align-items-center">
-                   <p class="font-weight-bold m-0">手机号</p>
-                   <div class="ml-2"><input type="text" placeholder="可用于登录和找回密码" class="form-control p-2 my_input"></div>
-                   <span class="my_small d-none">设置后，不可更改，中英文均可</span>
+              <div  class="d-flex mb-3 align-items-center position-relative">
+                   <label for="phone" class="font-weight-bold">手机号</label>
+                   <input v-model="phone" @click="getPhone"  @blur="losePhone" id="phone" type="phone" name="phone" placeholder="可用于登录和找回密码" class=" my_input" :class="border.phone">
+                   <span  v-show="del.phone" class="clear"  @click="clearPhone"></span>
+                   <span v-show="msg.phone" class="more_small text-muted" v-text="phoneMsg" :class="[err.phone,right.phone]"></span>
               </div>
-              <div class="d-flex mb-4 align-items-center">
-                  <p class="font-weight-bold pl-3 m-0 ">密码</p>
-                  <div class="ml-2"><input type="text" placeholder="请输入登录密码" class="form-control p-2 my_input"></div>
-                  <span class="my_small d-none">设置后，不可更改，中英文均可,</span>
+              <div  class="d-flex mb-3 align-items-center position-relative">
+                  <label for="upwd" class="font-weight-bold">密码</label>
+                  <input v-model="upwd" @click="getUpwd" @blur="loseUpwd" id="upwd" type="text" name="upwd" placeholder="请输入登录密码" class="my_input" :class="border.upwd">
+                  <span  v-show="del.upwd" class="clear"  @click="clearUpwd"></span>
+                  <span v-show="msg.upwd" v-text="upwdMsg" class="more_small text-muted" :class="err.upwd"></span>
+                  <div v-show="msg.upwd2" class="position-relative" >
+                    <span class="left-dir"></span>
+                    <ul  class="upwd-require more_small text-muted">
+                        <li :class="[circle,err.upwd1,right.upwd1]">长度为6-14个字符</li>
+                        <li :class="[circle,right.upwd2]">支持数字，大小写字母和标点符号</li>
+                        <li :class="[circle,err.upwd3,right.upwd3]">不允许有空格</li>
+                    </ul>
+                  </div>
+                  
               </div>
-              <div class="d-flex mb-4 align-items-center">
-                  <p class="font-weight-bold m-0">验证码</p>
-                  <div class="ml-2"><input type="text" placeholder="请输入验证码" class="form-control p-2 my_input prov_inpput" ></div>
-                  <button class="get_prov btn ml-2 p-2">获取短信验证码</button>
+              <div class="d-flex mb-3 align-items-center position-relative">
+                  <label for="prov" class="font-weight-bold">验证码</label>
+                  <input @click="getProve" @blur="loseProve"  v-model="prove" id="prov" type="text" placeholder="请输入验证码" class=" my_input prov_input" :class="border.prove">
+                  <span  v-show="del.prove" class="clear clearProve"  @click="clearProve"></span>
+                  <input type="button" value="获取短信验证码" class="get_prov ml-1 ">
+                  <span v-show="msg.prove" class="more_small text-muted pl-4 " v-text="proveMsg" :class="err.prove"></span>
               </div>
-              <p class="my_small d-flex align-items-center ml-5"><input type="checkbox" class="mt-1 mr-1">阅读并接受 《<a href="#">百度用户协议</a>》及《<a href="#">百度隐私权保护声明</a>》
+              <p class="my_small d-flex align-items-center readkonw"><input type="checkbox" v-model="checked" class="mt-1 mr-1">阅读并接受 《<a href="#">百度用户协议</a>》及《<a href="#">百度隐私权保护声明</a>》<span v-show="msg.read" class="more_small text-muted" :class="err.check">请勾选“阅读并接受百度用户协议”</span>
               </p>
-              <button class="text-white  btn my_button  my_input ml-5 mt-1">注册</button>
+              <input @click="reg" type="submit" value="注册" class="text-white reg-input">
           </div>
           <div class="right_bg mr-5 pl-3 pr-3">
               <div class="d-flex align-items-center border-bottom border-light  pb-2 pt-2">
                   <img src="../img/register/reg.png.png" alt="" class="mr-2">
                   <p class="mt-1 font-weight-bold m-0 text-muted">手机快速注册</p>
               </div>
+              <hr class="mb-2 mt-0">
               <p class="my_small text-muted">请使用中国大陆手机号，编辑短信：</p>
               <p class="my_small phone_color font-weight-bold">6-14位字符（支持数字/字母/符号）</p>
               <p class="my_small text-muted">作为登录密码，发送至：</p>
@@ -73,5 +89,7 @@
       </div>
       <p class="text-center mt-5 text-primary">2018&nbsp;&copy;Baidu</p>
   </div>
+  <script src="js/vue.js"></script>
+  <script src="js/register.js"></script>
 </body>
 </html>

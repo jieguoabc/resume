@@ -11,6 +11,8 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
     <title>Title</title>
   <style>
       /* div{
@@ -20,45 +22,50 @@
 </head>
 <body >
 <header id="header"></header>
-<div class="midd_width mt-3">
+<div id="main" class="midd_width mt-3">
     <!--路径-->
-    <p class="mt-2 my_small"><a href="#" class="text-dark">成都美食</a>><a href="#" class="text-dark">成都春熙路美食</a>><a href="#" class="text-dark">成都春熙路自助餐</a>><span class="text-danger">醉烧刀海鲜美食汇(春熙Village店)</span></p>
-    <div class="row my_shadow p-3 pr-0 mr-0">
+    <ul class="nav mb-2 ">
+        <li><a href="#" class="text-muted pr-2 pl-2">{{product.title_a}}</a><span>></span></li>
+        <li><a href="#" class="text-muted pr-2 pl-2">{{product.title_d}}</a><span>></span></li>
+        <li><a href="#" class="text-muted pr-2 pl-2">{{product.title_t}}</a><span>></span></li>
+        <li><a href="#" class=" pr-2 pl-2 pink_color">{{product.title}}</a></li>
+    </ul>
+    <div class="row my_shadow p-3 pr-0 mr-0 ml-0 pl-0">
         <div class="col-8">
-            <h3>醉烧刀海鲜美食汇(春熙Village店)</h3>
-            <p  class="my_small"><span class="text_color">（908人评价）<span class="pl-2 pr-2">|</span>人均：</span>¥108</p>
-            <p class="text_color my_small">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：成都市锦江区东大街上东大街段111号（春熙Village6楼）</p>
-            <p class="text_color my_small">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：02886666671</p>
-            <p class="text_color my_small">营业时间：全天</p>
+            <h3>{{product.title}} <a href="#"><img src="img/detail/icon_13a5290.png" alt=""></a></h3>
+            <p  class="my_small d-flex item-align-center"><img src="img/detail/star_14_7e02fb1.png" alt=""><span class="yellow-score pl-2">4.5</span><span class="text_color">（908人评价）<span class="pl-2 pr-2">|</span>人均：</span>¥{{product.price}}</p>
+            <p class="text_color my_small d-flex item-align-center">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址：{{product.address}}<img src="img/detail/$7@G)]$UCN0YC4(X{_6A6NC.png" alt="" class="pl-3"><span class="text-info">查看地图</span></p>
+            <p class="text_color my_small">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话：{{product.phone}}</p>
+            <p class="text_color my_small">营业时间：{{product.time}}</p>
         </div>
         <div class="col-4 ">
-            <img src="img/detail/1538730365(1).jpg" alt="" class="img-fluid">
+            <img :src="pics[0].md" alt="" class="img-fluid">
         </div>
     </div>
     <!--详情-->
     <div class="row mr-0">
-        <div class="col-9 pr-0">
+        <div class="col-9 pr-0 mb-5">
             <h5 class="mt-3">当前商家团购</h5>
             <hr>
             <div class="row">
                 <div class="col-6">
                     <div class="row my_small">
-                        <div class="col-5"><img src="img/detail/1538744021(1).jpg" alt="" class="img-fluid"></div>
+                        <div class="col-5"><a :href="'detail_order1.html?lid='+product.lid" target="_blank"><img :src="pics[0].sm" alt="" class="img-fluid"></a></div>
                         <div class="col-7">
-                            <p class="mb-2">醉烧刀海鲜美食荟</p>
-                            <p class="mb-2 text-muted">醉烧刀单人海鲜美食自助1份！免费WiFi...</p>
+                            <p class="mb-2">{{product.fname}}</p>
+                            <p class="mb-2 text-muted text-truncate">{{product.serve}}</p>
                             <p class="m-0 text-muted">已售14048</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-6 col-12 ">
+                <div class="col-6 ">
                     <ul class="d-flex list-unstyled justify-content-between align-items-center">
-                        <li class="my_small text-muted">有效期：2018-10-30</li>
+                        <li class="my_small text-muted">有效期：2018-11-29</li>
                         <li>
-                            <div class="money d-flex"><span class="pt-1">￥</span><h4 >78</h4></div>
-                            <p class="my_small text-muted">门市价<s>￥108</s></p>
+                            <div class="pink_color d-flex"><span class="pt-1">￥</span><h4 >{{product.price}}</h4></div>
+                            <p class="my_small text-muted">门市价<s>￥{{product.orgin_price}}</s></p>
                         </li>
-                        <li><a href="detail_order.html"><button class="btn my_button text-white" >立即购买</button></a></li>
+                        <li><a :href="'detail_order1.html?lid='+product.lid" target="_blank"><button class="btn my_button text-white" >立即购买</button></a></li>
                     </ul>
                 </div>
             </div>
@@ -71,100 +78,144 @@
                     <div class="eval">4.5</div>
                     <p class="text_color my_small">共有909人评论</p>
                 </div>
+                <!-- 评价条 -->
                 <div class="col-6 text-center">
-                    <div class="my_small">
-                        <p>好评<span class="scoll_one d-inline-block ml-2 mr-2"></span>817条</p>
-                        <p>中评<span class="scoll_two d-inline-block ml-2"></span><span class="scoll_three d-inline-block mr-3"></span>49条</p>
-                        <p>差评<span class="scoll_two d-inline-block ml-2"></span><span class="scoll_three d-inline-block mr-3"></span>50条</p>
+                    <div class="my_small text-left pl-5">
+                        <p class="pl-5">
+                            <span class="">好评</span> 
+                            <span class=" scoll_length d-inline-block position-relative ml-2 mr-2">
+                                <em class="position-absolute scoll_one d-inline-block"></em>
+                            </span > 
+                            <span>817条</span> 
+                        </p>
+                        <p class="pl-5">
+                            <span>中评</span> 
+                            <span class=" scoll_length d-inline-block  position-relative  ml-2 mr-2">
+                                <em class="position-absolute scoll_two d-inline-block"></em>
+                            </span > 
+                            <span>49条</span> 
+                        </p>
+                        <p class="pl-5">
+                            <span>差评</span> 
+                            <span class=" scoll_length d-inline-block position-relative  ml-2 mr-2">
+                                <em class="position-absolute scoll_three d-inline-block"></em>
+                            </span > 
+                            <span>50条</span> 
+                        </p>         
                     </div>
                 </div>
             </div>
             <hr>
             <p class="text_color">大家都在说</p>
-            <div class="d-flex flex-wrap">
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">品种丰富（143）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">环境不错（142）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">服务态度好（119）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">味道不错（98）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">菜品新鲜（45）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">环境很好（38）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">味道一般（26）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">种类不多（20）</a>
-                <a href="#" class="my_small text-muted eval_choose p-1 m-1">态度差（14）</a>
+            <div class="d-flex my_small">
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>品种丰富</span><span>（143）</span></a>
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>环境不错</span><span>（133）</span></a>
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>服务态度好</span><span>（88）</span></a>
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>菜品新鲜</span><span>（84）</span></a>
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>环境很好</span><span>（37）</span></a>
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>服务很好</span><span>（36）</span></a>
+                <a href="#" class="text-muted eval_well p-1 m-1"><span>味道不错</span><span>（20）</span></a>
+                <a href="#" class="text-muted eval_bad p-1 m-1"><span>味道一般</span><span>（22）</span></a>
+                
             </div>
             <hr>
             <!--评价分类-->
-            <div class="row bg-light m-0 pt-2 pb-2 border-top border-bottom">
+            <div class="row bg-light m-0 border-top border-bottom">
                 <ul class="nav col-9 my_small">
-                    <li class="nav-item"><a href="#" class="my_class">全部（916）</a><span class="text-muted p-2">|</span></li>
-                    <li class="nav-item"><a href="#" class="my_class">好评（817）</a><span class="text-muted p-2">|</span></li>
-                    <li class="nav-item"><a href="#" class="my_class">中评（49）</a><span class="text-muted p-2">|</span></li>
-                    <li class="nav-item"><a href="#" class="my_class">差评（50）</a><span class="text-muted p-2">|</span></li>
+                    <li class="nav-item pink-border pt-2 pb-2 "><a href="#" class="my_class border-right  pl-2 pr-2  pink_color position-relative">全部 <span>（916）</span><i class="pink-icon"></i></a></li>
+                    <li class="nav-item  pt-2 pb-2 "><a href="#" class="my_class  border-right  pl-2 pr-2">好评 <span>（817）</span></a></li>
+                    <li class="nav-item  pt-2 pb-2 "><a href="#" class="my_class  border-right  pl-2 pr-2">中评 <span>（49）</span></a></li>
+                    <li class="nav-item  pt-2 pb-2 "><a href="#" class="my_class  border-right  pl-2 pr-2">差评 <span>（50）</span></a></li>
                 </ul>
-                <div class="col-3 d-flex ">
-                   <div class="d-flex align-items-center mr-5"><input type="checkbox" class="mt-1">有图片</div>
-                    <div class="d-flex pr-0">默认<span class="my_select3 mt-2 ml-1"></span></div>
+                <div class="col-3 d-flex text-muted justify-content-end">
+                    <div class="d-flex align-items-center mr-5"><input type="checkbox" class="mt-1">有图片</div>
+                    <div class="d-flex pr-0 align-items-center">默认<span class="my_select3 mt-2 ml-1"></span></div>
                 </div>
             </div>
-            <div class="mb-5 mt-5">
-                <h1 class="text-center">暂未开通，敬请期待。。。</h1>
-            </div>
+            <!-- 评价详情 -->
+            <div class="mt-2 mb-5">
+                    <div class="media text-muted my_small mb-2 border-bottom">
+                        <div>
+                            <img src="img/order/0000e586b7e5b0b9e78eb90000.jpg" alt="">
+                            <p>嘉****琪</p>
+                        </div>
+                        <div class="media-body ml-4 d-flex justify-content-between" >
+                            <div >
+                                <p class="font-weight-bold mb-1">2018-08-16 01:31:14说</p>
+                                <p class="text_color">今天去吃了！很不错、下次还是选择这家店</p>
+                                <p class=" mt-2">醉烧刀海鲜美食汇(春熙Village店)</p>
+                            </div>
+                            <div class="mt-2">
+                                <img src="img/order/star_14_7e02fb1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media text-muted my_small mb-2 border-bottom">
+                        <div>
+                            <img src="img/order/0000e586b7e5b0b9e78eb90000.jpg" alt="">
+                            <p>嘉****琪</p>
+                        </div>
+                        <div class="media-body ml-4 d-flex justify-content-between" >
+                            <div >
+                                <p class="font-weight-bold mb-1">2018-08-16 01:31:14说</p>
+                                <p class="text_color">今天去吃了！很不错、下次还是选择这家店</p>
+                                <p class=" mt-2">醉烧刀海鲜美食汇(春熙Village店)</p>
+                            </div>
+                            <div class="mt-2">
+                                <img src="img/order/star_14_7e02fb1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media text-muted my_small mb-2 border-bottom">
+                        <div>
+                            <img src="img/order/0000e586b7e5b0b9e78eb90000.jpg" alt="">
+                            <p>嘉****琪</p>
+                        </div>
+                        <div class="media-body ml-4 d-flex justify-content-between" >
+                            <div >
+                                <p class="font-weight-bold mb-1">2018-08-16 01:31:14说</p>
+                                <p class="text_color">今天去吃了！很不错、下次还是选择这家店</p>
+                                <p class=" mt-2">醉烧刀海鲜美食汇(春熙Village店)</p>
+                            </div>
+                            <div class="mt-2">
+                                <img src="img/order/star_14_7e02fb1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media text-muted my_small mb-2 border-bottom">
+                        <div>
+                            <img src="img/order/0000e586b7e5b0b9e78eb90000.jpg" alt="">
+                            <p>嘉****琪</p>
+                        </div>
+                        <div class="media-body ml-4 d-flex justify-content-between" >
+                            <div >
+                                <p class="font-weight-bold mb-1">2018-08-16 01:31:14说</p>
+                                <p class="text_color">今天去吃了！很不错、下次还是选择这家店</p>
+                                <p class=" mt-2">醉烧刀海鲜美食汇(春熙Village店)</p>
+                            </div>
+                            <div class="mt-2">
+                                <img src="img/order/star_14_7e02fb1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-info text-center mt-4">查看全部评价</p>
+                </div>    
         </div>
         <div class="col-3 pl-5 mt-5">
-            <ul class="list-group-item p-0">
-                <li class="list-group-item"><h5>看了又看</h5></li>
-                <li class="list-group-item">
+            <ul class="list-group p-0">
+                <li  class="list-group-item">
+                    <h5 class="d-flex justify-content-between">看了又看 <a href="#" @click.prevent="refresh"><span class="refresh"></span></a></h5>          
+                </li>    
+                <li class="list-group-item" v-for="item in intro.intro4">
                     <a href="#">
                         <div class="row">
                            <div class="col-6 p-0">
-                               <img src="img/detail/1538750552(1).jpg" alt="" class="img-fluid">
+                               <img :src="item.md" alt="" class="img-fluid">
                            </div>
                             <div class="col-6 p-0 my_small pl-2 pr-3 text-muted">
-                                <p class="mb-0 history">火上芭蕾烤...</p>
-                                <p class="mb-0">单人晚市自助1份！免费WIFI</p>
-                                <p><span class="money">￥69</span>&nbsp;&nbsp;&nbsp;&nbsp;<s>88</s></p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="row">
-                            <div class="col-6 p-0">
-                                <img src="img/detail/1538750552(1).jpg" alt="" class="img-fluid">
-                            </div>
-                            <div class="col-6 p-0 my_small pl-2 pr-3 text-muted">
-                                <p class="mb-0 ">火上芭蕾烤...</p>
-                                <p class="mb-0">单人晚市自助1份！免费WIFI</p>
-                                <p><span class="money">￥69</span>&nbsp;&nbsp;&nbsp;&nbsp;<s>88</s></p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="row">
-                            <div class="col-6 p-0">
-                                <img src="img/detail/1538750552(1).jpg" alt="" class="img-fluid">
-                            </div>
-                            <div class="col-6 p-0 my_small pl-2 pr-3 text-muted">
-                                <p class="mb-0 ">火上芭蕾烤...</p>
-                                <p class="mb-0">单人晚市自助1份！免费WIFI</p>
-                                <p><span class="money">￥69</span>&nbsp;&nbsp;&nbsp;&nbsp;<s>88</s></p>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#">
-                        <div class="row">
-                            <div class="col-6 p-0">
-                                <img src="img/detail/1538750552(1).jpg" alt="" class="img-fluid">
-                            </div>
-                            <div class="col-6 p-0 my_small pl-2 pr-3 text-muted">
-                                <p class="mb-0 ">火上芭蕾烤...</p>
-                                <p class="mb-0">单人晚市自助1份！免费WIFI</p>
-                                <p><span class="money">￥69</span>&nbsp;&nbsp;&nbsp;&nbsp;<s>88</s></p>
+                                <p class="mb-0 history  text-truncate" v-text="item.title"></p>
+                                <p class="mb-0 text-truncate" v-text="item.serve"></p>
+                                <p><span class="pink_color" >￥{{item.price}}</span>&nbsp;&nbsp;&nbsp;&nbsp;<s v-text="item.orgin_price"></s></p>
                             </div>
                         </div>
                     </a>
@@ -173,27 +224,11 @@
         </div>
     </div>
 </div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <footer id="footer"></footer>
 <script src="js/footer.js"></script>
 <script src="js/jquery-1.11.3.js"></script>
 <script src="js/header.js"></script>
+<script src="js/detail.js"></script>
 
 </body>
 </html>

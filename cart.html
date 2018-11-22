@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+    <title>Title</title>
+    <style>
+    [v-cloak]{
+        display:none;
+    }
+    </style>
+</head>
+<body>
+<div id="main">
+    <!--顶部-->
+    <div class="midd_width d-flex justify-content-between my_small pl-5 pr-5">
+        <p class="pt-2"><span class="font-weight-bold p-3" >成都</span><span class="order-blue">[切换城市]</span></p>
+        <div>
+            <ul class="nav align-items-center ">
+                <li class="nav-link ">hi,<span class="text-muted" v-text="user.uname"></span></li><span>|</span>
+                <li class="nav-link "><a href="#" class="order-blue">我的订单</a></li><span>|</span>
+                <li class="nav-link "><a href="#" class="order-blue">我的糯米</a></li><span>|</span>
+                <li class="nav-link "><a href="#" class="order-blue" @click="signout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <hr class="mt-0">
+    <div class="midd_width  pl-5 pr-5">
+        <div class=" d-flex justify-content-between">
+            <!--左侧logo-->
+            <div class="d-flex">
+                <a href="index.html"><img src="img/cart/logo-main.jpg" alt=""></a>
+                <div>
+                    <p class="m-0 my_small"><span class="pink_color">我&nbsp;&nbsp;的&nbsp;·&nbsp;</span><span>生&nbsp;&nbsp;活</span></p>
+                    <img src="img/cart/nuomi_43e11ba.png" alt="">
+                </div>
+            </div>
+            <!--右侧进度条-->
+            <ul class="nav my_small ">
+                <li class="nav-link"><span class="no ">1</span><span class="pink_color pl-2">确认订单</span></li>
+                <li class="to-line nav-link mt-3"></li>
+                <li class="nav-link"><span class="no bg-secondary">2</span><span class="text-muted pl-2">选择支付方式</span></li>
+                <li class="to-line nav-link mt-3"></li>
+                <li class="nav-link"><span class="no bg-secondary">3</span><span class="text-muted pl-2">支付成功</span></li>
+            </ul>
+        </div>
+        <p class="my_small text-muted mt-4">购买成功后，糯米券将发到您的手机: <span class="pink_color" v-text="user.phone"></span><a href="#" class="order-blue pl-3">绑定新号码</a></p>
+        <div class="row m-0 bg-light text-center border">
+            <div class="col-4 border-right pt-2 pb-2 ">商品</div>
+            <div class="col-2 border-right pt-2 pb-2 ">单价</div>
+            <div class="col-2 border-right pt-2 pb-2 ">数量</div>
+            <div class="col-2 border-right pt-2 pb-2 ">优惠</div>
+            <div class="col-2 pt-2 pb-2 ">小计</div>
+        </div>
+        <!--订单列表-->
+        <div class="row m-0 text-center align-items-center border-bottom pt-2 pb-2">
+            <div class="col-4  pt-2 pb-2 ">
+                <div class="media">
+                    <img :src="pics[0].sm" alt="" class="w-50">
+                    <div class="media-body text-muted my_small text-left" v-cloak>【{{product.fname}}】{{product.serve}}</div>
+                </div>
+            </div>
+            <div class="col-2  pt-2 pb-2 " v-cloak>￥{{product.price}}</div>
+            <div class="col-2  pt-2 pb-2 d-flex justify-content-center">
+                <a @click.prevent="getsub" @mouseover=bgpink(1) @mouseout=bggray(1) href="#" class="position-relative count_btn " :class="pbt.pbt1"><span class="sub d-inline-block " :class="pinkbg.pinkbg1"></span></a>
+                <input type="text" class="my_input"  v-model="value" value="1">
+                <a @click.prevent="getadd" @mouseover=bgpink(2) @mouseout=bggray(2) href="#" class="position-relative count_btn" :class="pbt.pbt2"><span class="sub d-inline-block" :class="pinkbg.pinkbg2"></span><span class="add d-inline-block " :class="pinkbg.pinkbg2"></span></a>
+            </div>
+            <div class="col-2  pt-2 pb-2 ">-￥0.00</div>
+            <div class="col-2 pt-2 pb-2 pink_color" v-cloak>￥{{product.price*value}}</div>
+        </div>
+        <!--优惠券-->
+        <div class="d-flex justify-content-end text-muted my_small mt-3 mr-2">
+            <div class="mr-5">
+                <input type="checkbox"  v-model="checked" id="name"><label for="name"><span class="pl-1 " >使用优惠券</span><span class="pink_color" v-cloak>-￥{{yh.money}}</label></span>
+                <p class="text-center" v-cloak>（可用1张）</p>
+            </div>
+
+        </div>
+        <div class="d-flex justify-content-end align-items-center">
+            <span>应付总额：</span><h5 class="pink_color mb-0">￥</h5><span class="font-lg pink_color" v-cloak>{{total}}</span>
+        </div>
+        <div class="d-flex justify-content-end">
+            <div>
+                <a href="#" class="order-blue">返回上一步</a>
+                <a href="#" class="btn btn_color text-white pl-4 pr-4"><h4>确认</h4></a>
+            </div>
+
+        </div>
+    </div>
+    <!--底部-->
+    <div class="midd_width top-border mt-5 ">
+        <ul class="list-unstyled d-flex justify-content-center mt-5 mb-5 my_small text_color ">
+            <li><a href="#" class="pr-3 text-muted">关于百度糯米</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted" >常见问题</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted">违规投诉</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted">开放平台</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted">用户协议</a><b>|</b></li>
+            <li class="pl-3 text-muted">客服电话：<span class="pink_color">400-9216-666</span>（每天9：00-22：00）</li>
+        </ul>
+        <p class="text-center  my_small text-secondary ">&copy;2015&nbsp;&nbsp;&nbsp;&nbsp;nuomi.com&nbsp;&nbsp;&nbsp;&nbsp;京ICP030173号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101080201406号</p>
+    </div>
+
+
+</div>
+<div class="container">
+<script src="js/cart.js"></script>
+</div>
+</body>
+</html>

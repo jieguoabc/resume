@@ -17,50 +17,54 @@
 </head>
 <body>
 <div id="main">
-    <div class="container mt-3 d-flex justify-content-sm-between pl-3 pr-3">
-        <div class="d-flex align-items-end ml-5">
-            <img src="img/register/logo-nuomi.png" alt="">
-            <h4 class="m-0 font-weight-light text-muted">|</h4>
-            <h5 class="m-0 text-muted ml-2">登录</h5>
+    <div class="login_width mt-4 d-flex justify-content-between  align-items-center">
+        <div class="d-flex align-items-end">
+            <div class="logo"><a href="index.html"></a></div>
+            <h5 class="m-0 text_color pl-3 border-left ml-3">登录</h5>
         </div>
-        <div class="mr-5">
-            <p class="d-inline-block text_color my_small mr-2">还没有百度糯米账号</p><a href="#" class="btn border text-muted pl-2 pr-2 pt-1 pb-1 font-weight-bold my_small">注册</a>
-        </div>
+        <p class="m-0 text_color my_small ">还没有百度糯米账号<a href="register.html" class="d-inline-block ml-2 btn border text-muted pl-2 pr-2 pt-1 pb-1 font-weight-bold my_small">注册</a></p>
     </div>
-    <div class="m_bg  mt-4" @keyup.13="signin()">
-        <div class="container d-flex mt-5 mb-5  justify-content-between">
-            <img src="img/login/log-2.png" alt="" class="ml-5">
-            <div class="bg-white border login_w p-3 mr-5">
+    <div class="m_bg  mt-3" @keyup.13="signin()">
+        <div class="login_width d-flex mt-5 mb-5  justify-content-between">
+            <div class="login-logo"></div>
+            <div class="bg-white border login_w p-3 ">
                 <h6 class="font-weight-bold text_color">登录百度糯米</h6>
-                <p class="d-flex justify-content-end"><img src="img/login/log-1.png" alt=""><span class="my_small text_color">短信快捷登录</span></p>
-                <div class="d-flex align-items-center justify-content-between border p-2 mb-3">
-                    <img src="img/login/log-3.png" alt="" >
-                    <input type="text" placeholder="手机/邮箱/用户名/糯米账号" name="uname" class="uname my_small border-0 login_input text-muted h-100 pl-1">
-                    <span class="text_color">X</span>
+                <p v-show="misLogin" class="more_small mb-0 mt-2"><span class="pink_color" v-text="message"></span><a href="#" v-text="findupwd"></a></p>
+                <p class="d-flex justify-content-end"><a href="#" class="my_small text_color bgimg" >短信快捷登录</a></p>
+                <div @click="getBorder" class="d-flex align-items-center  stateBorder p-1 mb-3 " :class="nameBorder">
+                    <label for="uname" class="bguname " :class="nameFocus"></label>
+                    <input @blur="loseUname" id="uname" v-model="uname" type="text" placeholder="手机/邮箱/用户名/糯米账号" name="uname" class="more_small border-0 login_input ">
+                    <span v-show="dis.dis1" @click="delName" class="text_color clearName " ></span>
                 </div>
-                <div class="d-flex align-items-center justify-content-between border p-2 mb-3">
-                    <img src="img/login/log-4.png" alt="" >
-                    <input type="text" placeholder="密码" name="upwd" class="upwd m y_small border-0 login_input text-muted h-100 pl-1">
-                    <span class="text_color">X</span>
+                <div @click="getBorder2" class="d-flex align-items-center  stateBorder p-1 mb-3" :class="upwdBorder">
+                    <label for="upwd" class="bgupwd " :class="upwdFocus"></label>
+                    <input @blur="loseUpwd" id="upwd" v-model="upwd" type="text" placeholder="密码" name="upwd" class="more_small border-0 login_input login_upwd ">
+                    <span v-show="dis.dis2" @click="delUpwd" class="text_color clearUpwd clearName" ></span>
                 </div>
                 <div class="d-flex justify-content-between ">
                     <p class="d-flex"><input type="checkbox" class=" mt-1"><span class="my_small text_color">下次自动登录</span></p>
-                    <a href="#" class="my_small">登录遇到问题</a>
+                    <a href="#" class="more_small">登录遇到问题</a>
                 </div>
-                <input type="submit" class="text-white my_button btn p-1 w-100" @click="signin()" value="登录">
-                <p class="mt-3"><img src="img/login/log-5.png" alt="" class="pr-3"><img src="img/login/log-6.png" alt=""></p>
+                <input type="button" class="mt-4 text-white my_button btn p-1 w-100" @click="signin()" value="登录">
+                <ul class="mt-3 mb-0 list-unstyled d-flex">
+                    <li class="mr-3"><a class="qq" href="https://graph.qq.com/oauth2.0/show?which=Login&display=pc&client_id=100312028&response_type=code&redirect_uri=https%3A%2F%2Fpassport.baidu.com%2Fphoenix%2Faccount%2Fafterauth%3Fmkey%3D3d6091f466e5075d1fe2dae744f4a0d4a5562a&state=1542269273&display=page&scope=get_user_info%2Cadd_share%2Cget_other_info%2Cget_fanslist%2Cget_idollist%2Cadd_idol%2Cget_simple_userinfo&traceid="></a></li>
+                    <li><a class="weibo" href="https://api.weibo.com/oauth2/authorize?client_id=2512457640&response_type=code&redirect_uri=https%3A%2F%2Fpassport.baidu.com%2Fphoenix%2Faccount%2Fafterauth%3Fmkey%3D6093b7e142c192e2f2767324e7d11bd88f8a50&forcelogin=1&state=1542269293&display=page&traceid="></a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <ul class="list-unstyled d-flex justify-content-center mt-5 mb-5 my_small text_color">
-        <li><a href="#" class="pr-3 text-muted">关于百度糯米</a><b>|</b></li>
-        <li><a href="#" class="pr-3 pl-3 text-muted" >常见问题</a><b>|</b></li>
-        <li><a href="#" class="pr-3 pl-3 text-muted">违规投诉</a><b>|</b></li>
-        <li><a href="#" class="pr-3 pl-3 text-muted">开放平台</a><b>|</b></li>
-        <li><a href="#" class="pr-3 pl-3 text-muted">用户协议</a><b>|</b></li>
-        <li class="pl-3 text-muted">客服电话：<span class="pink_color">400-9216-666</span>（每天9：00-22：00）</li>
-    </ul>
-    <p class="text-center  my_small text-secondary ">&copy;2015&nbsp;&nbsp;&nbsp;&nbsp;nuomi.com&nbsp;&nbsp;&nbsp;&nbsp;京ICP030173号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101080201406号</p>
+    <div class="login_width">
+        <ul class="list-unstyled d-flex justify-content-center mt-5 mb-5 my_small text_color">
+            <li><a href="#" class="pr-3 text-muted">关于百度糯米</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted" >常见问题</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted">违规投诉</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted">开放平台</a><b>|</b></li>
+            <li><a href="#" class="pr-3 pl-3 text-muted">用户协议</a><b>|</b></li>
+            <li class="pl-3 text-muted">客服电话：<span class="pink_color">400-9216-666</span>（每天9：00-22：00）</li>
+        </ul>
+        <p class="text-center  my_small text-secondary ">&copy;2015&nbsp;&nbsp;&nbsp;&nbsp;nuomi.com&nbsp;&nbsp;&nbsp;&nbsp;京ICP030173号&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;京公网安备1101080201406号</p>
+    </div>
+   
 </div>
 <script src="js/vue.js"></script>
 <script src="js/login.js"></script>
