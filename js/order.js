@@ -28,4 +28,7 @@ $(window).load(function(){
                     $mask.css({left,top});
                     $lgDiv.css("background-position",`-${2*left}px -${2*top}px`)
                 });
+
+
+
             })
